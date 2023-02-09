@@ -73,7 +73,7 @@ const AdminStaff = () => {
                             }
                         </Card>
                         <Card className='card-end' style={{ width: show ? '260px' : '80px', height: '79px', border: 'none' }}>
-                            <Link to='/admin/dasboard'>
+                            <Link to='/admin/dashboard'>
                                 <Card
                                     className='card-items'
                                     style={{ height: '45px', display: 'flex', flexDirection: 'row', width: show ? '230px' : '45px', border: 'none ' }}

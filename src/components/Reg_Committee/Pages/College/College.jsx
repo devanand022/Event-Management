@@ -87,15 +87,17 @@ const College = () => {
               }
             </Card>
             <Card className='card-end' style={{ width: show ? '260px' : '80px', height: '79px', border: 'none' }}>
-              <Card
-                className='card-items'
-                style={{ height: '45px', display: 'flex', flexDirection: 'row', width: show ? '230px' : '45px', border: 'none ' }}
-              >
-                <MdIcons.MdLogout size={25} className='m-2' />
-                {show ?
-                  (<h6 className='mx-2 my-2'>Logout</h6>) : null
-                }
-              </Card>
+              <Link to='/'>
+                <Card
+                  className='card-items'
+                  style={{ height: '45px', display: 'flex', flexDirection: 'row', width: show ? '230px' : '45px', border: 'none ' }}
+                >
+                  <MdIcons.MdLogout size={25} className='m-2' />
+                  {show ?
+                    (<h6 className='mx-2 my-2'>Logout</h6>) : null
+                  }
+                </Card>
+              </Link>
             </Card>
           </Card>
         </Col>
