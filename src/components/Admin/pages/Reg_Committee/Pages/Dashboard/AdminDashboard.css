@@ -1,0 +1,25 @@
+.dashcontent{
+    margin-left: -50px;
+    transition: ease-in-out 0.2s;
+}
+.dashtop{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    height: 280px;
+}
+.dashcards{
+    width: 200px;
+    margin-left: 50px;
+}
+.dashcards>:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+}
+.dashseccards{
+    margin-left: 50px;
+}
+

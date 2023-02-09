@@ -1,0 +1,13 @@
+.top-college-search{
+    display: flex;
+    justify-content: flex-end;
+}
+.collegetable{
+    display: flex;
+    align-items: center;
+    transition: ease-in-out 0.2s;
+}
+.buttong{
+    flex-direction: row;
+    gap: 10px;
+}

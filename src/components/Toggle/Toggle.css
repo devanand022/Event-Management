@@ -1,0 +1,51 @@
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #9B93C8;
+}
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.card{
+    width: 300px;
+}
+.actionbtns{
+    width: 100%;
+    background-color: #5544AE;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    border-radius: 50px;
+}
+.actionbtn{
+    padding: 1em;
+    width: 50%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: 600;
+    cursor: pointer;
+}
+.movebtn{
+    position: absolute;
+    width:50%;
+    height: 90%;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    background-color: #fff;
+    color: #5544AE;
+    margin: 2px;
+    font-size: 0.8em;
+    font-weight: 600;
+    transform: translateX(0);
+    transition: all 0.2s ease-in-out;
+}

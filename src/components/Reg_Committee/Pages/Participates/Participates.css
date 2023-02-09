@@ -1,0 +1,62 @@
+.partpage{
+    background-color: #FFFA65;
+}
+.sidebar{
+    margin-left: -11px;
+    align-items: center;
+    transition:  all ease-in-out 0.2s;
+}
+.bars{
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease-in-out 0.2s;
+}
+.card-top{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    transition:  all ease-in-out 0.2s;
+}
+.card-img{
+    border-radius: 100%;
+    width: 50px;
+}
+.card-middle{
+    align-items: center;
+    gap: 15px;
+    transition:  all ease-in-out 0.2s;
+}
+.card-items{
+    align-items:center ;
+    transition:  all ease-in-out 0.2s;
+    color: black;
+}
+.card-items:hover{
+    background-color: #5544AE;
+    color: white;
+}
+.card-end{
+    align-items: center;
+    justify-content: center;
+    transition:  all ease-in-out 0.2s;
+}
+.rightside{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.partcontent{
+    margin-left: -50px;
+    transition: ease-in-out 0.2s;
+}
+.top-participate-search{
+    display: flex;
+    justify-content: flex-end;
+}
+.participatetable{
+    display: flex;
+    align-items: center;
+    transition: ease-in-out 0.2s;
+}
