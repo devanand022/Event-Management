@@ -1,15 +1,28 @@
 import React, { useState } from 'react'
 import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 import image from '../../../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md'
 import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import './Add.css'
+import { createCollege } from '../../../../actions/collegeAction'
 
 const Add = () => {
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [college, setCollege] = useState("");
+  const [add, setAdd] = useState([]);
+  const dispatch = useDispatch();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //     dispatch(createCollege(college));
+  // }
+
+  const handleChange = (e, i) => {
+
+  }
 
   const menuItem = [
     {
@@ -100,139 +113,92 @@ const Add = () => {
           </Card>
         </Col>
         <Col className='rightside'>
-          <Card 
-            style={{height: '97vh', width: show?'1075px': '1255px', transition: 'ease-in-out 0.2s', border: 'none'}} 
+          <Card
+            style={{ height: '97vh', width: show ? '1075px' : '1255px', transition: 'ease-in-out 0.2s', border: 'none' }}
             className="addcontent"
           >
             <h2 className='mx-3 my-2'>Add Participates</h2>
-            <Form className='justify-content-center align-items-center d-flex' style={{display: 'flex', flexDirection: 'column'}}>
+            <Form className='justify-content-center align-items-center d-flex' style={{ display: 'flex', flexDirection: 'column' }}>
               <div className="justify-content-center align-items-center d-flex add-top">
                 <Form.Group className='mb-3 mt-2 add-top-group'>
-                  <Form.Control placeholder='Enter Your College Name' style={{width: '350px'}} />
+                  <Form.Control placeholder='Enter Your College Name' name="college_name" value={college} onchange={e => setCollege(e.target.value)} style={{ width: '500px' }} />
                 </Form.Group>
-                <Form.Group className='mb-3 mt-2 add-top-group' style={{justifyContent: 'flex-end', display: 'flex'}}>
-                  <Button variant='none' style={{ width: '150px', background: '#5544AE', color: 'white'}}>New</Button>
+                <Form.Group className='mb-3 mt-2 m-2'>
+                  <Button variant='none' style={{ width: '150px', background: '#5544AE', color: 'white' }} >Add</Button>
+                </Form.Group>
+                <Form.Group className='mb-3 mt-2 add-top-group' style={{ justifyContent: 'flex-end', display: 'flex' }}>
+                  <Button variant='none' style={{ width: '150px', background: '#5544AE', color: 'white' }} >New</Button>
                 </Form.Group>
               </div>
-              <Card 
-                className='add-details' 
-                style={{height: '430px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center'}}
+            </Form>
+            <Form className='justify-content-center align-items-center d-flex' style={{ display: 'flex', flexDirection: 'column' }}>
+              <Card
+                className='add-details'
+                style={{ height: '430px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}
               >
-                <Card 
+                <Card
                   className='m-3'
-                  style={{width: '97%'}} 
+                  style={{ width: '97%' }}
                 >
-                  <Row className=''>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Control placeholder='Enter Your Name' />
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Control type='email' placeholder='Enter Your Eamil Address' />
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Control placeholder='Enter Your Phone Number' />
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                </Card>
-                <Card 
-                  className='m-3'
-                  style={{width: '97%'}} 
-                >
-                  <Row className=''>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Control placeholder='Enter Your Name' />
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Control type='email' placeholder='Enter Your Eamil Address' />
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Control placeholder='Enter Your Phone Number' />
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                    <Col md={show? 4 : 3}>
-                      <Form.Group className='m-2'>
-                        <Form.Select>
-                          <option value='ug'>UG</option>
-                          <option value='Pg'>PG</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Col>
-                  </Row>
+                  {add.map((data, i) => {
+                    <Row className=''>
+                      <Col md={show ? 4 : 3}>
+                        <Form.Group className='m-2'>
+                          <Form.Control placeholder='Enter Your Name' name='name' onchange={handleChange(i)} />
+                        </Form.Group>
+                      </Col>
+                      <Col md={show ? 4 : 3}>
+                        <Form.Group className='m-2'>
+                          <Form.Control type='email' placeholder='Enter Your Eamil Address' name="email" onchange={handleChange(i)} />
+                        </Form.Group>
+                      </Col>
+                      <Col md={show ? 4 : 3}>
+                        <Form.Group className='m-2'>
+                          <Form.Control placeholder='Enter Your Phone Number' name='phone' onchange={handleChange(i)} />
+                        </Form.Group>
+                      </Col>
+                      <Col md={show ? 4 : 3}>
+                        <Form.Group className='m-2'>
+                          <Form.Select>
+                            <option name='ug' onchange={handleChange(i)} value='ug'>UG</option>
+                            <option name='pg' onchange={handleChange(i)} value='Pg'>PG</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                      <Col md={show ? 4 : 3}>
+                        <Form.Group className='m-2'>
+                          <Form.Select>
+                            <option name='aided' onchange={handleChange(i)} value='aided'>Aided</option>
+                            <option name='sf' onchange={handleChange(i)} value='sf'>SF</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                      <Col md={show ? 4 : 3}>
+                        <Form.Group className='m-2'>
+                          <Form.Select>
+                            <option value='event1'>Event1</option>
+                            <option value='event2'>Event2</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                      <Col md={show ? 4 : 3}>
+                        <Form.Group className='m-2'>
+                          <Form.Select>
+                            <option value='event1'>Event1</option>
+                            <option value='event2'>Event2</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                  })}
                 </Card>
               </Card>
               <div className="justify-content-end align-items-center d-flex add-top">
-                <Form.Group className='mx-2 my-3' style={{justifyContent: 'flex-end', display: 'flex'}}>
-                  <Button variant='danger' style={{ width: '150px'}}>Cancel</Button>
+                <Form.Group className='mx-2 my-3' style={{ justifyContent: 'flex-end', display: 'flex' }}>
+                  <Button variant='danger' style={{ width: '150px' }}>Cancel</Button>
                 </Form.Group>
-                <Form.Group className='mx-2 my-3' style={{justifyContent: 'flex-end', display: 'flex'}}>
-                  <Button variant='none' style={{ width: '150px', background: '#5544AE', color: 'white'}}>Add</Button>
+                <Form.Group className='mx-2 my-3' style={{ justifyContent: 'flex-end', display: 'flex' }}>
+                  <Button variant='none' style={{ width: '150px', background: '#5544AE', color: 'white' }}>Add</Button>
                 </Form.Group>
               </div>
             </Form>
