@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const CreateCollege = createSlice({
+const collegeSlice = createSlice({
     name : 'college',
     initialState : {
-        loading: false,
-        college_name: {}
+        loading: false
     },
     reducers :{
         collegeRequest(state, action){
@@ -27,8 +26,8 @@ const CreateCollege = createSlice({
     }
 });
 
-const { actions, reducers } = CreateCollege;
+const { actions, reducer } = collegeSlice;
 
 export const { collegeRequest, collegeSuccess, collegeFail } = actions;
 
-export default reducers;
+export default reducer;

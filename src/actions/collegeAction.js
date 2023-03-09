@@ -7,6 +7,6 @@ export const createCollege = (college) => async (dispatch) => {
         const { data } = await axios.post('http://localhost:5000/api/college', {college});
         dispatch(collegeSuccess(data));
     } catch (error) {
-        dispatch(collegeFail(error.response.data.message));
+        dispatch(collegeFail(error.response.message));
     }
 }
