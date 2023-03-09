@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const collegeSlice = createSlice({
     name : 'college',
     initialState : {
-        loading: false
+        loading: false,
     },
     reducers :{
         collegeRequest(state, action){

@@ -18,11 +18,14 @@ import Finals from './components/StaffEvent/Pages/Finals/Finals';
 import AdminStaff from './components/Admin/pages/StaffEvent/AdminStaff';
 import AdminPrelims from './components/Admin/pages/StaffEvent/Pages/Prelims/AdminPrelims';
 import AdminFinals from './components/Admin/pages/StaffEvent/Pages/Finals/AdminFinals';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer theme='dark' />
       <Routes>
         <Route path="/" element={<Toggle />} />
         <Route path="/reg/dashboard" element={<MainPage />} />

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Container, Card, Row, Col, Form, Button, Table } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap'
 import image from '../../../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md'
@@ -7,12 +7,17 @@ import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import './Add.css'
 import { createCollege } from '../../../../actions/collegeAction'
-import { useDispatch } from 'react-redux'
-import ReactScrollableFeed from 'react-scrollable-feed'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify';
+import { getEvent } from '../../../../actions/getEventAction'
+import { getCollege } from '../../../../actions/getCollegeAction'
 
 const Add = () => {
 
   const [show, setShow] = useState(false);
+  const { message } = useSelector((state) => state.collegeState);
+  const { colleges } = useSelector((state) => state.getCollegeState);
+  const { events } = useSelector((state) => state.getEventState);
   const [college, setCollege] = useState("")
   const dispatch = useDispatch();
   const [add, setAdd] = useState([{
@@ -25,6 +30,7 @@ const Add = () => {
     event1: "",
     event2: ""
   }]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createCollege(college));
@@ -34,6 +40,12 @@ const Add = () => {
   const handleClick = () => {
     console.log(add);
     setAdd([...add, { name: "", college: "", email: "", phone: "", degree: "", session: "", event1: "", event2: "" }]);
+  }
+
+  const handleRemove = index => {
+    const list = [...add];
+    list.splice(index, 1);
+    setAdd(list);
   }
 
   const menuItem = [
@@ -63,6 +75,16 @@ const Add = () => {
       name: "Event"
     },
   ];
+
+  useEffect(() => {
+    if (message) {
+      return toast.info(message, {
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+    }
+    dispatch(getCollege);
+    dispatch(getEvent);
+  }, [message, dispatch])
   return (
     <Container fluid className='addpage'>
       <Row>
@@ -162,9 +184,11 @@ const Add = () => {
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Select>
-                              <option value='aided'>Aided</option>
-                              <option value='sf'>SF</option>
+                            <Form.Select name='college'>
+                              <option>Select</option>
+                              {colleges && colleges.map(college => (
+                                <option value={college.college_name}>{college.college_name}</option>
+                              ))}
                             </Form.Select>
                           </Form.Group>
                         </Col>
@@ -197,23 +221,27 @@ const Add = () => {
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
                             <Form.Select name='event1'>
-                              <option value='event1'>Event1</option>
-                              <option value='event2'>Event2</option>
+                              <option>Select</option>
+                              {events && events.map(event => (
+                                <option value={event.name}>{event.name}</option>
+                              ))}
                             </Form.Select>
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
                             <Form.Select name='event2'>
-                              <option value='event1'>Event1</option>
-                              <option value='event2'>Event2</option>
+                              <option>Select</option>
+                              {events && events.map(event => (
+                                <option value={event.name}>{event.name}</option>
+                              ))}
                             </Form.Select>
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
                           {add.length !== 1 &&
                             <Form.Group className='m-2'>
-                              <Button varient='danger' >Remove</Button>
+                              <Button varient='danger' onClick={() => handleRemove(i)} >Remove</Button>
                             </Form.Group>
                           }
                         </Col>
@@ -221,7 +249,6 @@ const Add = () => {
                     </Card>
                   )
                 })}
-
               </Card>
               <div className="justify-content-end align-items-center d-flex add-top">
                 <Form.Group className='mx-2 my-3' style={{ justifyContent: 'flex-end', display: 'flex' }}>
