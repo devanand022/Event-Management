@@ -2,26 +2,25 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const getEventSlice = createSlice({
-    name: 'getevent',
+    name: 'getevents',
     initialState: {
-        loading: false,
-        events: {}
+        loading: false
     },
-    reducers:{
+    reducers: {
         getEventRequest(state, action){
             return {
-                loading: false
+                loading: true
             }
         },
         getEventSuccess(state, action){
             return {
-                loading: true,
-                events: action.payload.event
+                loading: false,
+                getEvents: action.payload.event
             }
         },
         getEventFail(state, action){
             return {
-                loading : false,
+                loading: false,
                 error: action.payload
             }
         }

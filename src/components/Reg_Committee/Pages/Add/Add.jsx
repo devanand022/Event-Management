@@ -6,21 +6,20 @@ import * as MdIcons from 'react-icons/md'
 import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import './Add.css'
-import { createCollege } from '../../../../actions/collegeAction'
+import { createCollege, getCollege } from '../../../../actions/collegeAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
-import { getEvent } from '../../../../actions/getEventAction'
-import { getCollege } from '../../../../actions/getCollegeAction'
-
+import { getEvent } from '../../../../actions/eventAction'
+import { createParticipates } from '../../../../actions/participateAction'
 const Add = () => {
 
   const [show, setShow] = useState(false);
   const { message } = useSelector((state) => state.collegeState);
-  const { colleges } = useSelector((state) => state.getCollegeState);
-  const { events } = useSelector((state) => state.getEventState);
-  const [college, setCollege] = useState("")
+  const { getColleges } = useSelector((state) => state.getCollegeState);
+  const { getEvents } = useSelector((state) => state.getEventState);
+  const { addmessage } = useSelector((state) => state.addState);
   const dispatch = useDispatch();
-  const [add, setAdd] = useState([{
+  const initialState = {
     name: "",
     college: "",
     email: "",
@@ -29,16 +28,30 @@ const Add = () => {
     session: "",
     event1: "",
     event2: ""
-  }]);
+  }
+
+  const [add, setAdd] = useState([initialState]);
+  const [college_name, setCollege] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createCollege(college));
-    setCollege("");
+    dispatch(createCollege(college_name));
+    setCollege("")
+  }
+
+  const handleInputChange = (e, i) => {
+    const inputdata = [...add]
+    inputdata[i][e.target.name] = e.target.value;
+    setAdd(inputdata);
+  }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createParticipates(add));
+    setAdd([initialState]);
   }
 
   const handleClick = () => {
-    console.log(add);
     setAdd([...add, { name: "", college: "", email: "", phone: "", degree: "", session: "", event1: "", event2: "" }]);
   }
 
@@ -47,6 +60,23 @@ const Add = () => {
     list.splice(index, 1);
     setAdd(list);
   }
+
+  useEffect(() => {
+    if(message) {
+      toast.info(message, {
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+      return
+    }
+    if(addmessage) {
+      return toast.info(addmessage, {
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+      return
+    }
+    dispatch(getCollege);
+    dispatch(getEvent);
+  }, [dispatch, message, addmessage])
 
   const menuItem = [
     {
@@ -76,15 +106,6 @@ const Add = () => {
     },
   ];
 
-  useEffect(() => {
-    if (message) {
-      return toast.info(message, {
-        position: toast.POSITION.BOTTOM_CENTER
-      })
-    }
-    dispatch(getCollege);
-    dispatch(getEvent);
-  }, [message, dispatch])
   return (
     <Container fluid className='addpage'>
       <Row>
@@ -155,7 +176,7 @@ const Add = () => {
             <Form onSubmit={handleSubmit} className='justify-content-center align-items-center d-flex' style={{ display: 'flex', flexDirection: 'column' }}>
               <div className="justify-content-center align-items-center d-flex add-top">
                 <Form.Group className='mb-3 mt-2 add-top-group'>
-                  <Form.Control placeholder='Enter Your College Name' value={college} onChange={e => setCollege(e.target.value)} style={{ width: '500px' }} />
+                  <Form.Control placeholder='Enter Your College Name' value={college_name} onChange={e => setCollege(e.target.value)} style={{ width: '500px' }} />
                 </Form.Group>
                 <Form.Group className='mb-3 mt-2 m-2'>
                   <Button variant='none' type='submit' style={{ width: '150px', background: '#5544AE', color: 'white' }} >Add</Button>
@@ -165,7 +186,7 @@ const Add = () => {
                 </Form.Group>
               </div>
             </Form>
-            <Form className='justify-content-center align-items-center d-flex' style={{ display: 'flex', flexDirection: 'column' }}>
+            <Form className='justify-content-center align-items-center d-flex' style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleFormSubmit}>
               <Card
                 className='add-details'
                 style={{ height: '430px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', overflowY: 'scroll' }}
@@ -179,32 +200,35 @@ const Add = () => {
                       <Row className=''>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Control placeholder='Enter Your Name' name='name' />
+                            <Form.Control placeholder='Enter Your Name' name='name' value={x.name} onChange={e => handleInputChange(e, i)} />
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Select name='college'>
-                              <option>Select</option>
-                              {colleges && colleges.map(college => (
-                                <option value={college.college_name}>{college.college_name}</option>
-                              ))}
+                            <Form.Select name='college' onChange={e => handleInputChange(e, i)}>
+                              <option value=''>Select</option>
+                              {
+                                getColleges && getColleges.map(getCollege => (
+                                  <option value={getCollege.college_name}>{getCollege.college_name}</option>
+                                ))
+                              }
                             </Form.Select>
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Control type='email' placeholder='Enter Your Eamil Address' name="email" />
+                            <Form.Control type='email' placeholder='Enter Your Eamil Address' value={x.email} name="email" onChange={e => handleInputChange(e, i)} />
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Control placeholder='Enter Your Phone Number' name='phone' />
+                            <Form.Control placeholder='Enter Your Phone Number' value={x.phone} name='phone' onChange={e => handleInputChange(e, i)} />
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Select name='degree'>
+                            <Form.Select name='degree' onChange={e => handleInputChange(e, i)} >
+                              <option value=''>Select</option>
                               <option name='ug' value='ug'>UG</option>
                               <option name='pg' value='Pg'>PG</option>
                             </Form.Select>
@@ -212,29 +236,34 @@ const Add = () => {
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Select name='session'>
+                            <Form.Select name='session' onChange={e => handleInputChange(e, i)} >
+                              <option value=''>Select</option>
                               <option name='aided' value='aided'>Aided</option>
                               <option name='sf' value='sf'>SF</option>
                             </Form.Select>
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
-                          <Form.Group className='m-2'>
+                          <Form.Group className='m-2' onChange={e => handleInputChange(e, i)} >
                             <Form.Select name='event1'>
                               <option>Select</option>
-                              {events && events.map(event => (
-                                <option value={event.name}>{event.name}</option>
-                              ))}
+                              {
+                                getEvents && getEvents.map(getEvent => (
+                                  <option value={getEvent.name}>{getEvent.name}</option>
+                                ))
+                              }
                             </Form.Select>
                           </Form.Group>
                         </Col>
                         <Col md={show ? 4 : 3}>
                           <Form.Group className='m-2'>
-                            <Form.Select name='event2'>
+                            <Form.Select name='event2' onChange={e => handleInputChange(e, i)} >
                               <option>Select</option>
-                              {events && events.map(event => (
-                                <option value={event.name}>{event.name}</option>
-                              ))}
+                              {
+                                getEvents && getEvents.map(getEvent => (
+                                  <option value={getEvent.name}>{getEvent.name}</option>
+                                ))
+                              }
                             </Form.Select>
                           </Form.Group>
                         </Col>
@@ -252,7 +281,7 @@ const Add = () => {
               </Card>
               <div className="justify-content-end align-items-center d-flex add-top">
                 <Form.Group className='mx-2 my-3' style={{ justifyContent: 'flex-end', display: 'flex' }}>
-                  <Button variant='none' style={{ width: '150px', background: '#5544AE', color: 'white' }}>Add</Button>
+                  <Button variant='none' type='submit' style={{ width: '150px', background: '#5544AE', color: 'white' }}>Add</Button>
                 </Form.Group>
               </div>
             </Form>

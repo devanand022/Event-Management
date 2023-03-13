@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const getCollegeSlice = createSlice({
-    name: 'getcollege',
+    name: 'getColleges',
     initialState: {
-        loading: false,
-        colleges: {}
+        loading: false
     },
     reducers: {
         getCollegeRequest(state, action){
@@ -14,8 +14,8 @@ const getCollegeSlice = createSlice({
         },
         getCollegeSuccess(state, action){
             return {
-                loading: true,
-                colleges: action.payload.result
+                loading: false,
+                getColleges: action.payload.college
             }
         },
         getCollegeFail(state, action){
@@ -27,7 +27,7 @@ const getCollegeSlice = createSlice({
     }
 });
 
-const {actions, reducer} = getCollegeSlice;
+const { actions, reducer } = getCollegeSlice;
 
 export const { getCollegeRequest, getCollegeSuccess, getCollegeFail } = actions;
 

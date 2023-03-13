@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const addParticipates = createSlice({
-    name : 'participate',
+const addSlice = createSlice({
+    name : 'add',
     initialState : {
         loading: false,
-        add: {}
     },
     reducers :{
         createRequest(state, action){
@@ -15,7 +14,7 @@ const addParticipates = createSlice({
         createSuccess(state, action){
             return {
                 loading: false,
-                message: action.payload.message
+                addmessage: action.payload.message
             }
         },
         createFail(state, action){
@@ -27,8 +26,8 @@ const addParticipates = createSlice({
     }
 });
 
-const { actions, reducers } = addParticipates;
+const { actions, reducer } = addSlice;
 
 export const { createRequest, createSuccess, createFail } = actions;
 
-export default reducers;
+export default reducer;
