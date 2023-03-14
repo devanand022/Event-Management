@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Button, Card, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getUnVerifiedCollege } from '../../../../actions/collegeAction'
 import './CollegeTab2.css'
 
@@ -16,11 +17,6 @@ const CollegeTab2 = ({ show }) => {
   return (
     <Card style={{ width: '100%', height: '88vh', border: 'none' }}>
       <h2 style={{ marginLeft: '10px' }}>College Details</h2>
-      <Form className="mb-3 mx-2 my-2 top-college-search">
-        <Form.Group className='col-4'>
-          <Form.Control placeholder='Enter the College Name' />
-        </Form.Group>
-      </Form>
       <Card style={{ width: '100%', height: '70vh', border: 'none', overflowY: 'scroll' }} className="collegetable">
         <Table striped borderless hover style={{ width: show ? '1000px' : '1200px' }}>
           <thead>
@@ -37,9 +33,11 @@ const CollegeTab2 = ({ show }) => {
                 <td>{x.college_name}</td>
                 <td>
                   <div className="d-flex buttong">
-                    <Button variant="info">View</Button>
+                    <Link to={`/reg/singlecollege/${x.lot_no}`}>
+                      <Button variant="info">View</Button>
+                    </Link>
                     <Button>Edit</Button>
-                    <Button variant="warning">UnVerify</Button>
+                    <Button variant="success">Verify</Button>
                     <Button variant="danger">Delete</Button>
                   </div>
                 </td>

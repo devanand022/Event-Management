@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Card, Row, Col, Form, Table, Button } from 'react-bootstrap'
 import image from '../../../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
@@ -6,10 +6,18 @@ import * as MdIcons from 'react-icons/md'
 import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import './Participates.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getParticipate } from '../../../../actions/participateAction'
 
 const Participates = () => {
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const { participate } = useSelector((state) => state.getParticipateState);
+
+  useEffect(() => {
+    dispatch(getParticipate);
+  }, [dispatch])
 
   const menuItem = [
     {
@@ -100,127 +108,41 @@ const Participates = () => {
           </Card>
         </Col>
         <Col className='rightside'>
-          <Card style={{height: '97vh', width: show?'1075px': '1255px', transition: 'ease-in-out 0.2s', border: 'none'}} className="partcontent">
+          <Card style={{ height: '97vh', width: show ? '1075px' : '1255px', transition: 'ease-in-out 0.2s', border: 'none' }} className="partcontent">
             <h2 className='m-2'>Particiaptes Details</h2>
-            <Form className="mb-3 mx-2 my-2 top-participate-search">
-              <Form.Group className='col-4'>
-                  <Form.Control placeholder='Enter the College Name' />
-              </Form.Group>
-            </Form>
-            <Card style={{width: '100%', height: '78vh', border: 'none'}} className='participatetable'>
-              <Table striped borderless hover style={{width: show? '1050px' : '1230px'}}>
+            <Card style={{ width: '100%', height: '78vh', border: 'none', overflowY: 'scroll' }} className='participatetable'>
+              <Table striped borderless hover style={{ width: show ? '1050px' : '1230px' }}>
                 <thead>
                   <tr>
                     <th>Lot No</th>
                     <th>Name</th>
                     <th>Contact</th>
                     <th>Email</th>
-                    <th>College Name</th>
                     <th>Event</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Deva</td>
-                    <td>1234567890</td>
-                    <td>ananddeva345@gmail.com</td>
-                    <td>Jamal Mohammed College</td>
-                    <td>
-                      <div className="d-flex flex-column">
-                        <span>Event1</span>
-                        <span>Event1</span>
-                        <span>Event1</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="d-flex justify-content-evenly">
-                        <Button>Edit</Button>
-                        <Button variant="danger">Delete</Button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Deva</td>
-                    <td>1234567890</td>
-                    <td>ananddeva345@gmail.com</td>
-                    <td>Jamal Mohammed College</td>
-                    <td>
-                      <div className="d-flex flex-column">
-                        <span>Event1</span>
-                        <span>Event1</span>
-                        <span>Event1</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="d-flex justify-content-evenly">
-                        <Button>Edit</Button>
-                        <Button variant="danger">Delete</Button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Deva</td>
-                    <td>1234567890</td>
-                    <td>ananddeva345@gmail.com</td>
-                    <td>Jamal Mohammed College</td>
-                    <td>
-                      <div className="d-flex flex-column">
-                        <span>Event1</span>
-                        <span>Event1</span>
-                        <span>Event1</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="d-flex justify-content-evenly">
-                        <Button>Edit</Button>
-                        <Button variant="danger">Delete</Button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Deva</td>
-                    <td>1234567890</td>
-                    <td>ananddeva345@gmail.com</td>
-                    <td>Jamal Mohammed College</td>
-                    <td>
-                      <div className="d-flex flex-column">
-                        <span>Event1</span>
-                        <span>Event1</span>
-                        <span>Event1</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="d-flex justify-content-evenly">
-                        <Button>Edit</Button>
-                        <Button variant="danger">Delete</Button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Deva</td>
-                    <td>1234567890</td>
-                    <td>ananddeva345@gmail.com</td>
-                    <td>Jamal Mohammed College</td>
-                    <td>
-                      <div className="d-flex flex-column">
-                        <span>Event1</span>
-                        <span>Event1</span>
-                        <span>Event1</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="d-flex justify-content-evenly">
-                        <Button>Edit</Button>
-                        <Button variant="danger">Delete</Button>
-                      </div>
-                    </td>
-                  </tr>
+                  {participate && participate.map(x => (
+                    <tr>
+                      <td>{x.lot_no}</td>
+                      <td>{x.name}</td>
+                      <td>{x.phone}</td>
+                      <td>{x.email}</td>
+                      <td>
+                        <div className="d-flex flex-column">
+                          <span>{x.event1}</span>
+                          <span>{x.event2}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="d-flex justify-content-evenly">
+                          <Button>Edit</Button>
+                          <Button variant="danger">Delete</Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </Card>

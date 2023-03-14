@@ -5,13 +5,19 @@ import getCollegeReducer from './slice/getCollegeSlice';
 import getEventReducer from './slice/getEventSlice';
 import addReducer from './slice/addSlice';
 import getUnVerifiedCollegeReducer from './slice/getUnVerifiedCollegeSlice';
+import getVerifiedCollegeReducer from './slice/getVerifiedCollegeSlice';
+import singleCollegeReducer from './slice/singleCollegeSlice';
+import getParticipateReducer from './slice/getParticipateSlice';
 
 const reducer = combineReducers({
     collegeState: collegeReducer,
     getCollegeState: getCollegeReducer,
     addState: addReducer,
     getEventState: getEventReducer,
-    getUnVerifiedCollegeState: getUnVerifiedCollegeReducer
+    getUnVerifiedCollegeState: getUnVerifiedCollegeReducer,
+    getVerifiedCollegeState: getVerifiedCollegeReducer,
+    singleCollegeState: singleCollegeReducer,
+    getParticipateState: getParticipateReducer
 })
 
 const store = configureStore({

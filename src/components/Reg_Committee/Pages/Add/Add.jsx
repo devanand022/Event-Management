@@ -209,7 +209,7 @@ const Add = () => {
                               <option value=''>Select</option>
                               {
                                 getColleges && getColleges.map(getCollege => (
-                                  <option value={getCollege.college_name}>{getCollege.college_name}</option>
+                                  <option value={getCollege.lot_no}>{getCollege.college_name}</option>
                                 ))
                               }
                             </Form.Select>

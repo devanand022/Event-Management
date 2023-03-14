@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const getUnVerifiedCollegeSlice = createSlice({
     name: 'getUnverifiedCollege',
     initialState: {
-        loading: true
+        loading: false
     },
     reducers: {
         getUnVerifiedCollegeRequest(state, action){

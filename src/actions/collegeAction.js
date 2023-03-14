@@ -2,6 +2,7 @@ import axios from 'axios';
 import { collegeFail, collegeRequest, collegeSuccess } from '../slice/collegeSlice';
 import { getCollegeFail, getCollegeRequest, getCollegeSuccess } from '../slice/getCollegeSlice';
 import { getUnVerifiedCollegeFail, getUnVerifiedCollegeRequest, getUnVerifiedCollegeSuccess } from '../slice/getUnVerifiedCollegeSlice';
+import { getVerifiedCollegeFail, getVerifiedCollegeRequest, getVerifiedCollegeSuccess } from '../slice/getVerifiedCollegeSlice';
 
 export const createCollege = college_name => async(dispatch) => {
     try {
@@ -16,7 +17,7 @@ export const createCollege = college_name => async(dispatch) => {
 export const getCollege = async(dispatch) => {
     try {
         dispatch(getCollegeRequest());
-        const { data } = await axios.get('http://localhost:5000/api/view/college');
+        const { data } = await axios.get('http://localhost:5000/api/view/colleges');
         dispatch(getCollegeSuccess(data));
     } catch (error) {
         dispatch(getCollegeFail(error.response.message));
@@ -26,9 +27,19 @@ export const getCollege = async(dispatch) => {
 export const getUnVerifiedCollege = async(dispatch) => {
     try {
         dispatch(getUnVerifiedCollegeRequest());
-        const { data } = await axios.get('http://localhost:5000/api/view/college/unverified');
+        const { data } = await axios.get('http://localhost:5000/api/view/colleges/unverified');
         dispatch(getUnVerifiedCollegeSuccess(data));
     } catch (error) {
         dispatch(getUnVerifiedCollegeFail(error.response.message));
+    }
+}
+
+export const getVerifiedCollege = async(dispatch) => {
+    try {
+        dispatch(getVerifiedCollegeRequest());
+        const { data } = await axios.get('http://localhost:5000/api/view/colleges/verified');
+        dispatch(getVerifiedCollegeSuccess(data));
+    } catch (error) {
+        dispatch(getVerifiedCollegeFail(error.response.message));
     }
 }

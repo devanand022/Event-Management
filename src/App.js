@@ -20,6 +20,8 @@ import AdminPrelims from './components/Admin/pages/StaffEvent/Pages/Prelims/Admi
 import AdminFinals from './components/Admin/pages/StaffEvent/Pages/Finals/AdminFinals';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import CollegeDetails from './components/Reg_Committee/Pages/College/CollegeDetails';
+import EditParticipate from './components/Reg_Committee/Pages/Participates/EditParticipate';
 
 
 function App() {
@@ -31,7 +33,9 @@ function App() {
         <Route path="/reg/dashboard" element={<MainPage />} />
         <Route path='/reg/add' element={<Add />} />
         <Route path='/reg/college' element={<College />} />
+        <Route path='/reg/singlecollege/:id' element={<CollegeDetails />} />
         <Route path='/reg/participate' element={<Participates />} />
+        <Route path='/reg/edit/participate/:id' element={<EditParticipate />} />
         <Route path='/reg/event' element={<Event />} />
         <Route path='/admin/dashboard' element={<Adminpage />} />
         <Route path='/admin/settings' element={<Settings />} />

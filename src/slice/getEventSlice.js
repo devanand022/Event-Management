@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const getEventSlice = createSlice({
     name: 'getevents',
     initialState: {
