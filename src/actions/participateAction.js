@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createFail, createRequest, createSuccess } from '../slice/addSlice';
 import { getParticipateFail, getParticipateRequest, getParticipateSuccess } from '../slice/getParticipateSlice';
 import { singleCollegeFail, singleCollegeRequest, singleCollegeSuccess } from '../slice/singleCollegeSlice';
+import { singleParticipateFail, singleParticipateRequest, singleParticipateSuccess } from '../slice/singleParticipateSlice';
 
 export const createParticipates = add => async(dispatch) => {
     try {
@@ -30,5 +31,15 @@ export const getParticipate = async(dispatch) => {
         dispatch(getParticipateSuccess(data));
     } catch (error) {
         dispatch(getParticipateFail(error.response.message));
+    }
+}
+
+export const singleParticipate = id => async(dispatch) => {
+    try {
+        dispatch(singleParticipateRequest());
+        const { data } = await axios.get(`http://localhost:5000/api/view/singleparticipate/${id}`);
+        dispatch(singleParticipateSuccess(data));
+    } catch (error) {
+        dispatch(singleParticipateFail());
     }
 }

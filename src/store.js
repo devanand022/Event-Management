@@ -8,6 +8,7 @@ import getUnVerifiedCollegeReducer from './slice/getUnVerifiedCollegeSlice';
 import getVerifiedCollegeReducer from './slice/getVerifiedCollegeSlice';
 import singleCollegeReducer from './slice/singleCollegeSlice';
 import getParticipateReducer from './slice/getParticipateSlice';
+import singleParticipateReducer from './slice/singleParticipateSlice';
 
 const reducer = combineReducers({
     collegeState: collegeReducer,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     getUnVerifiedCollegeState: getUnVerifiedCollegeReducer,
     getVerifiedCollegeState: getVerifiedCollegeReducer,
     singleCollegeState: singleCollegeReducer,
-    getParticipateState: getParticipateReducer
+    getParticipateState: getParticipateReducer,
+    singleParticipateState: singleParticipateReducer
 })
 
 const store = configureStore({
