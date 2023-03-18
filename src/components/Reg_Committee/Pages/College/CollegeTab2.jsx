@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { Button, Card, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getUnVerifiedCollege, verifyCollege } from '../../../../actions/collegeAction'
-import { VerifyParticipate } from '../../../../actions/participateAction'
+import { getUnVerifiedCollege, verifyCollege, delCollege } from '../../../../actions/collegeAction'
+import { VerifyParticipate, delParticipate } from '../../../../actions/participateAction'
 import './CollegeTab2.css'
 
 const CollegeTab2 = ({ show }) => {
@@ -15,6 +15,12 @@ const CollegeTab2 = ({ show }) => {
     dispatch(verifyCollege(id));
     dispatch(VerifyParticipate(id));
     setTimeout(() => dispatch(getUnVerifiedCollege), 500)
+  }
+
+  const del = (id) => {
+    dispatch(delCollege(id));
+    dispatch(delParticipate(id));
+    setTimeout(() => dispatch(getUnVerifiedCollege), 500);
   }
 
   useEffect(() => {
@@ -44,7 +50,7 @@ const CollegeTab2 = ({ show }) => {
                       <Button variant="info">View</Button>
                     </Link>
                     <Button onClick={() => verify(x.lot_no)} variant="success">Verify</Button>
-                    <Button variant="danger">Delete</Button>
+                    <Button variant="danger" onClick={() => del(x.lot_no)}>Delete</Button>
                   </div>
                 </td>
               </tr>

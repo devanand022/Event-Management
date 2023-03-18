@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { Button, Card, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getVerifiedCollege, unVerifyCollege } from '../../../../actions/collegeAction'
-import { unVerifyParticipate } from '../../../../actions/participateAction'
+import { delCollege, getVerifiedCollege, unVerifyCollege } from '../../../../actions/collegeAction'
+import { delParticipate, unVerifyParticipate } from '../../../../actions/participateAction'
 import './CollegeTab1.css'
 
 const CollegeTab1 = ({ show }) => {
@@ -14,11 +14,13 @@ const CollegeTab1 = ({ show }) => {
     const unverify = (id) => {
         dispatch(unVerifyCollege(id));
         dispatch(unVerifyParticipate(id));
-        setTimeout(() => dispatch(getVerifiedCollege), 500)
+        setTimeout(() => dispatch(getVerifiedCollege), 500);
       }
 
       const del = (id) => {
-        
+        dispatch(delCollege(id));
+        dispatch(delParticipate(id));
+        setTimeout(() => dispatch(getVerifiedCollege), 500);
       }
 
     useEffect(() => {

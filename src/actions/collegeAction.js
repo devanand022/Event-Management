@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { collegeFail, collegeRequest, collegeSuccess } from '../slice/collegeSlice';
+import { delCollegeFail, delCollegeRequest, delCollegeSuccess } from '../slice/delCollegeSlice';
 import { getCollegeFail, getCollegeRequest, getCollegeSuccess } from '../slice/getCollegeSlice';
 import { getUnVerifiedCollegeFail, getUnVerifiedCollegeRequest, getUnVerifiedCollegeSuccess } from '../slice/getUnVerifiedCollegeSlice';
 import { getVerifiedCollegeFail, getVerifiedCollegeRequest, getVerifiedCollegeSuccess } from '../slice/getVerifiedCollegeSlice';
@@ -52,7 +53,7 @@ export const verifyCollege = id => async(dispatch) => {
         const { data } = await axios.put(`http://localhost:5000/api/view/college/verify/${id}`);
         dispatch(VerifyCollegeSuccess(data));
     } catch (error) {
-        dispatch(VerifyCollegeFail(error.response.message))
+        dispatch(VerifyCollegeFail(error.response.message));
     }
 }
 
@@ -62,6 +63,16 @@ export const unVerifyCollege = id => async(dispatch) => {
         const { data } = await axios.put(`http://localhost:5000/api/view/college/unverify/${id}`);
         dispatch(unVerifyCollegeSuccess(data));
     } catch (error) {
-        dispatch(unVerifyCollegeFail(error.response.message))
+        dispatch(unVerifyCollegeFail(error.response.message));
+    }
+}
+
+export const delCollege = id => async(dispatch) => {
+    try{
+        dispatch(delCollegeRequest());
+        const { data } = await axios.delete(`http://localhost:5000/api/delete/college/${id}`);
+        dispatch(delCollegeSuccess(data));
+    } catch (error) {
+        dispatch(delCollegeFail(error.response.message));
     }
 }

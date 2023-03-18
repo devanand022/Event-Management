@@ -7,13 +7,18 @@ import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import './Participates.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getParticipate } from '../../../../actions/participateAction'
+import { delSingleParticipate, getParticipate } from '../../../../actions/participateAction'
 
 const Participates = () => {
 
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const { participate } = useSelector((state) => state.getParticipateState);
+
+  const del = (id) => {
+    dispatch(delSingleParticipate(id));
+    setTimeout(() => dispatch(getParticipate), 500);
+  }
 
   useEffect(() => {
     dispatch(getParticipate);
@@ -138,7 +143,7 @@ const Participates = () => {
                       <td>
                         <div className="d-flex justify-content-evenly">
                         <Link to={`/reg/edit/participate/${x.id}`}><Button>Edit</Button></Link>
-                          <Button variant="danger">Delete</Button>
+                          <Button variant="danger" onClick={() => del(x.id)}>Delete</Button>
                         </div>
                       </td>
                     </tr>

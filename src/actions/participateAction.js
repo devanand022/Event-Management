@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { createFail, createRequest, createSuccess } from '../slice/addSlice';
+import { delParticipateFail, delParticipateRequest, delParticipateSuccess } from '../slice/delParticipateSlice';
+import { delSingleParticipateFail, delSingleParticipateRequest, delSingleParticipateSuccess } from '../slice/delSingleParticipateSlice';
 import { editParticipateFail, editParticipateRequest, editParticipateSuccess } from '../slice/editParticipateSlice';
 import { getParticipateFail, getParticipateRequest, getParticipateSuccess } from '../slice/getParticipateSlice';
 import { singleCollegeFail, singleCollegeRequest, singleCollegeSuccess } from '../slice/singleCollegeSlice';
@@ -74,5 +76,25 @@ export const unVerifyParticipate = id => async(dispatch) => {
         dispatch(unVerifyParticipateSuccess(data));
     } catch (error) {
         dispatch(unVerifyParticipateFail(error.response.message));
+    }
+}
+
+export const delParticipate = id => async(dispatch) => {
+    try{
+        dispatch(delParticipateRequest());
+        const { data } = await axios.delete(`http://localhost:5000/api/delete/participate/${id}`);
+        dispatch(delParticipateSuccess(data));
+    } catch (error) {
+        dispatch(delParticipateFail(error.response.message));
+    }
+}
+
+export const delSingleParticipate = id => async(dispatch) => {
+    try{
+        dispatch(delSingleParticipateRequest());
+        const { data } = await axios.delete(`http://localhost:5000/api/delete/participate/${id}`);
+        dispatch(delSingleParticipateSuccess(data));
+    } catch (error) {
+        dispatch(delSingleParticipateFail(error.response.message));
     }
 }
