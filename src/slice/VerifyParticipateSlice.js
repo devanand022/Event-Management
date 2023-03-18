@@ -1,33 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const editParticipateSlice = createSlice({
-    name: 'editParticiapte',
+const VerifyParticipateSlice = createSlice({
+    name: 'VerifyParticipate',
     initialState: {
         loading: false
     },
     reducers: {
-        editParticipateRequest(state, action){
+        VerifyParticipateRequest(state, action){
             return{
                 loading: true
             }
         },
-        editParticipateSuccess(state, action){
+        VerifyParticipateSuccess(state, action){
             return{
                 loading: false,
                 message: action.payload.message
             }
         },
-        editParticipateFail(state, action){
+        VerifyParticipateFail(state, action){
             return{
-                loading: false,
+                laoding: false,
                 error: action.payload
             }
         }
     }
 });
 
-const { actions, reducer } = editParticipateSlice;
+const { actions, reducer } = VerifyParticipateSlice;
 
-export const { editParticipateRequest, editParticipateSuccess, editParticipateFail } = actions;
+export const { VerifyParticipateRequest, VerifyParticipateSuccess, VerifyParticipateFail } = actions;
 
 export default reducer;

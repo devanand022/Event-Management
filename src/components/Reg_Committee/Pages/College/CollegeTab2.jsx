@@ -2,13 +2,20 @@ import React, { useEffect } from 'react'
 import { Button, Card, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getUnVerifiedCollege } from '../../../../actions/collegeAction'
+import { getUnVerifiedCollege, verifyCollege } from '../../../../actions/collegeAction'
+import { VerifyParticipate } from '../../../../actions/participateAction'
 import './CollegeTab2.css'
 
 const CollegeTab2 = ({ show }) => {
 
   const dispatch = useDispatch();
   const { unverifiedcolleges } = useSelector((state) => state.getUnVerifiedCollegeState);
+
+  const verify = (id) => {
+    dispatch(verifyCollege(id));
+    dispatch(VerifyParticipate(id));
+    setTimeout(() => dispatch(getUnVerifiedCollege), 500)
+  }
 
   useEffect(() => {
     dispatch(getUnVerifiedCollege);
@@ -36,8 +43,7 @@ const CollegeTab2 = ({ show }) => {
                     <Link to={`/reg/singlecollege/${x.lot_no}`}>
                       <Button variant="info">View</Button>
                     </Link>
-                    <Button>Edit</Button>
-                    <Button variant="success">Verify</Button>
+                    <Button onClick={() => verify(x.lot_no)} variant="success">Verify</Button>
                     <Button variant="danger">Delete</Button>
                   </div>
                 </td>

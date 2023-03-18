@@ -1,33 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const editParticipateSlice = createSlice({
-    name: 'editParticiapte',
+const unVerifyCollegeSlice = createSlice({
+    name: 'unVerifyCollege',
     initialState: {
         loading: false
     },
     reducers: {
-        editParticipateRequest(state, action){
+        unVerifyCollegeRequest(state, action){
             return{
                 loading: true
             }
         },
-        editParticipateSuccess(state, action){
+        unVerifyCollegeSuccess(state, action){
             return{
                 loading: false,
                 message: action.payload.message
             }
         },
-        editParticipateFail(state, action){
+        unVerifyCollegeFail(state, action){
             return{
-                loading: false,
+                laoding: false,
                 error: action.payload
             }
         }
     }
 });
 
-const { actions, reducer } = editParticipateSlice;
+const { actions, reducer } = unVerifyCollegeSlice;
 
-export const { editParticipateRequest, editParticipateSuccess, editParticipateFail } = actions;
+export const { unVerifyCollegeRequest, unVerifyCollegeSuccess, unVerifyCollegeFail } = actions;
 
 export default reducer;

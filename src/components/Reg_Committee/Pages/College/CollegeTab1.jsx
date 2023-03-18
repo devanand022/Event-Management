@@ -1,13 +1,25 @@
 import React, { useEffect } from 'react'
 import { Button, Card, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getVerifiedCollege } from '../../../../actions/collegeAction'
+import { Link } from 'react-router-dom'
+import { getVerifiedCollege, unVerifyCollege } from '../../../../actions/collegeAction'
+import { unVerifyParticipate } from '../../../../actions/participateAction'
 import './CollegeTab1.css'
 
 const CollegeTab1 = ({ show }) => {
 
     const dispatch = useDispatch();
     const { verifiedcolleges } = useSelector((state) => state.getVerifiedCollegeState);
+
+    const unverify = (id) => {
+        dispatch(unVerifyCollege(id));
+        dispatch(unVerifyParticipate(id));
+        setTimeout(() => dispatch(getVerifiedCollege), 500)
+      }
+
+      const del = (id) => {
+        
+      }
 
     useEffect(() => {
         dispatch(getVerifiedCollege);
@@ -31,10 +43,11 @@ const CollegeTab1 = ({ show }) => {
                                 <td>{x.college_name}</td>
                                 <td>
                                     <div className="d-flex buttong">
-                                        <Button variant="info">View</Button>
-                                        <Button>Edit</Button>
-                                        <Button variant="success">Verify</Button>
-                                        <Button variant="danger">Delete</Button>
+                                        <Link to={`/reg/singlecollege/${x.lot_no}`}>
+                                            <Button variant="info">View</Button>
+                                        </Link>
+                                        <Button variant="warning" onClick={() => unverify(x.lot_no)}>unVerify</Button>
+                                        <Button variant="danger" onClick={() => del(x.lot_no)}>Delete</Button>
                                     </div>
                                 </td>
                             </tr>

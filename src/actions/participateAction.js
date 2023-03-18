@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { createFail, createRequest, createSuccess } from '../slice/addSlice';
+import { editParticipateFail, editParticipateRequest, editParticipateSuccess } from '../slice/editParticipateSlice';
 import { getParticipateFail, getParticipateRequest, getParticipateSuccess } from '../slice/getParticipateSlice';
 import { singleCollegeFail, singleCollegeRequest, singleCollegeSuccess } from '../slice/singleCollegeSlice';
 import { singleParticipateFail, singleParticipateRequest, singleParticipateSuccess } from '../slice/singleParticipateSlice';
+import { unVerifyParticipateFail, unVerifyParticipateRequest, unVerifyParticipateSuccess } from '../slice/unVerifyParticipateSlice';
+import { VerifyParticipateFail, VerifyParticipateRequest, VerifyParticipateSuccess } from '../slice/VerifyParticipateSlice';
 
 export const createParticipates = add => async(dispatch) => {
     try {
@@ -40,6 +43,36 @@ export const singleParticipate = id => async(dispatch) => {
         const { data } = await axios.get(`http://localhost:5000/api/view/singleparticipate/${id}`);
         dispatch(singleParticipateSuccess(data));
     } catch (error) {
-        dispatch(singleParticipateFail());
+        dispatch(singleParticipateFail(error.response.message));
+    }
+}
+
+export const editParticipate = (name, email, phone, session, degree, event1, event2, id) => async(dispatch) => {
+    try {
+        dispatch(editParticipateRequest());
+        const { data } = await axios.put(`http://localhost:5000/api/view/editparticipate/${id}`, {name, email, degree, session, event1, phone, event2});
+        dispatch(editParticipateSuccess(data));
+    } catch (error) {
+        dispatch(editParticipateFail(error.response.message));
+    }
+}
+
+export const VerifyParticipate = id => async(dispatch) => {
+    try {
+        dispatch(VerifyParticipateRequest());
+        const { data } = await axios.put(`http://localhost:5000/api/view/participate/verify/${id}`);
+        dispatch(VerifyParticipateSuccess(data));
+    } catch (error) {
+        dispatch(VerifyParticipateFail(error.response.message));
+    }
+}
+
+export const unVerifyParticipate = id => async(dispatch) => {
+    try {
+        dispatch(unVerifyParticipateRequest());
+        const { data } = await axios.put(`http://localhost:5000/api/view/participate/unverify/${id}`);
+        dispatch(unVerifyParticipateSuccess(data));
+    } catch (error) {
+        dispatch(unVerifyParticipateFail(error.response.message));
     }
 }

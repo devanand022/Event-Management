@@ -137,7 +137,7 @@ const Participates = () => {
                       </td>
                       <td>
                         <div className="d-flex justify-content-evenly">
-                          <Button>Edit</Button>
+                        <Link to={`/reg/edit/participate/${x.id}`}><Button>Edit</Button></Link>
                           <Button variant="danger">Delete</Button>
                         </div>
                       </td>

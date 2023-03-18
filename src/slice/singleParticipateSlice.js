@@ -14,7 +14,7 @@ const singleParticipateSlice = createSlice({
         singleParticipateSuccess(state, action){
             return{
                 loading: false,
-                singleparticipate: action.payload.singleparticipate
+                single: action.payload.singleparticipate
             }
         },
         singleParticipateFail(state, action){
