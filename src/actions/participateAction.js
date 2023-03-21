@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createFail, createRequest, createSuccess } from '../slice/addSlice';
+import { countParticipateFail, countParticipateRequest, countParticipateSuccess } from '../slice/countParticipate';
 import { delParticipateFail, delParticipateRequest, delParticipateSuccess } from '../slice/delParticipateSlice';
 import { delSingleParticipateFail, delSingleParticipateRequest, delSingleParticipateSuccess } from '../slice/delSingleParticipateSlice';
 import { editParticipateFail, editParticipateRequest, editParticipateSuccess } from '../slice/editParticipateSlice';
@@ -96,5 +97,15 @@ export const delSingleParticipate = id => async(dispatch) => {
         dispatch(delSingleParticipateSuccess(data));
     } catch (error) {
         dispatch(delSingleParticipateFail(error.response.message));
+    }
+}
+
+export const countParticipate = async(dispatch) => {
+    try {
+        dispatch(countParticipateRequest());
+        const { data } = await axios.get('http://localhost:5000/api/count/participate');
+        dispatch(countParticipateSuccess(data));
+    } catch (error) {
+        dispatch(countParticipateFail(error.response.message));
     }
 }

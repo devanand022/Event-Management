@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Card, Row, Col, Form, Table, Button } from 'react-bootstrap'
 import image from '../../../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
@@ -6,10 +6,22 @@ import * as MdIcons from 'react-icons/md'
 import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import './Event.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEvent, selectEvent } from '../../../../actions/eventAction'
 
 const Event = () => {
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [event, setEvent] = useState("");
+  const dispatch = useDispatch();
+
+  const Search = (e) => {
+    e.preventDefault();
+    dispatch(selectEvent(event));
+  }
+
+  const { getEvents } = useSelector((state) => state.getEventState);
+  const { selectEvents } = useSelector((state) => state.selectEventState);
 
   const menuItem = [
     {
@@ -38,6 +50,10 @@ const Event = () => {
       name: "Event"
     },
   ];
+
+  useEffect(() => {
+    dispatch(getEvent);
+  }, [dispatch])
   return (
     <Container fluid className='eventpage'>
       <Row>
@@ -100,129 +116,53 @@ const Event = () => {
           </Card>
         </Col>
         <Col className='rightside'>
-          <Card style={{height: '97vh', width: show?'1075px': '1255px', transition: 'ease-in-out 0.2s', border: 'none'}} className="eventcontent">
-              <h2 className='m-2'>Event Participates List</h2>
-              <Card className="top_event mx-2 mt-4" style={{border: 'none'}}>
-                <Form className='d-flex justify-content-between'>
-                  <Form.Select className='mb-3' style={{width: '30%'}}>
-                    <option>Select the event</option>
-                    <option>Event1</option>
-                    <option>Event1</option>
-                    <option>Event1</option>
-                    <option>Event1</option>
-                  </Form.Select>
-                  <Form.Group className='mb-3 col-4'>
-                    <Form.Control placeholder='Enter the Participates Name' />
-                  </Form.Group>
-                </Form>
-              </Card>
-              <Card className="my-2 mx-2" style={{width: show? '1057px' : '1235px', height: '79vh', border: 'none'}}>
-                <Table striped borderless hover>
-                  <thead>
-                    <tr>
-                      <th>Lot No</th>
-                      <th>Name</th>
-                      <th>Contact</th>
-                      <th>Email</th>
-                      <th>College Name</th>
-                      <th>Event</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Deva</td>
-                      <td>1234567890</td>
-                      <td>ananddeva345@gmail.com</td>
-                      <td>Jamal Mohammed College</td>
-                      <td>
-                        <div className="d-flex flex-column">
-                          <span>Event1</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-evenly">
-                          <Button>Edit</Button>
-                          <Button variant="danger">Delete</Button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Deva</td>
-                      <td>1234567890</td>
-                      <td>ananddeva345@gmail.com</td>
-                      <td>Jamal Mohammed College</td>
-                      <td>
-                        <div className="d-flex flex-column">
-                          <span>Event1</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-evenly">
-                          <Button>Edit</Button>
-                          <Button variant="danger">Delete</Button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Deva</td>
-                      <td>1234567890</td>
-                      <td>ananddeva345@gmail.com</td>
-                      <td>Jamal Mohammed College</td>
-                      <td>
-                        <div className="d-flex flex-column">
-                          <span>Event1</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-evenly">
-                          <Button>Edit</Button>
-                          <Button variant="danger">Delete</Button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Deva</td>
-                      <td>1234567890</td>
-                      <td>ananddeva345@gmail.com</td>
-                      <td>Jamal Mohammed College</td>
-                      <td>
-                        <div className="d-flex flex-column">
-                          <span>Event1</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-evenly">
-                          <Button>Edit</Button>
-                          <Button variant="danger">Delete</Button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Deva</td>
-                      <td>1234567890</td>
-                      <td>ananddeva345@gmail.com</td>
-                      <td>Jamal Mohammed College</td>
-                      <td>
-                        <div className="d-flex flex-column">
-                          <span>Event1</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-evenly">
-                          <Button>Edit</Button>
-                          <Button variant="danger">Delete</Button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card>
+          <Card style={{ height: '97vh', width: show ? '1075px' : '1255px', transition: 'ease-in-out 0.2s', border: 'none' }} className="eventcontent">
+            <h2 className='m-2'>Event Participates List</h2>
+            <Card className="top_event mx-2 mt-4" style={{ border: 'none' }}>
+              <Form className='d-flex' onSubmit={Search}>
+                <Form.Select className='mb-3' style={{ width: '30%' }} value={event} onChange={e => setEvent(e.target.value)} >
+                  <option>Select</option>
+                  {
+                    getEvents && getEvents.map(getEvent => (
+                      <option value={getEvent.name}>{getEvent.name}</option>
+                    ))
+                  }
+                </Form.Select>
+                <Form.Group className='mx-2'>
+                  <Button type='submit' >Search</Button>
+                </Form.Group>
+              </Form>
+            </Card>
+            <Card className="my-2 mx-2" style={{ width: show ? '1057px' : '1235px', height: '79vh', border: 'none' }}>
+              <Table striped borderless hover>
+                <thead>
+                  <tr>
+                    <th>Lot No</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Event</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    selectEvents && selectEvents.map(x => (
+                      <tr>
+                        <td>{x.lot_no}</td>
+                        <td>{x.name}</td>
+                        <td>{x.phone}</td>
+                        <td>{x.email}</td>
+                        <td>
+                          <div className="d-flex flex-column">
+                            <span>{event}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </Table>
+            </Card>
           </Card>
         </Col>
       </Row>

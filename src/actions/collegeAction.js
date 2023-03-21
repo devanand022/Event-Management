@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { collegeFail, collegeRequest, collegeSuccess } from '../slice/collegeSlice';
+import { countCollegeFail, countCollegeRequest, countCollegeSuccess } from '../slice/countCollege';
 import { delCollegeFail, delCollegeRequest, delCollegeSuccess } from '../slice/delCollegeSlice';
 import { getCollegeFail, getCollegeRequest, getCollegeSuccess } from '../slice/getCollegeSlice';
 import { getUnVerifiedCollegeFail, getUnVerifiedCollegeRequest, getUnVerifiedCollegeSuccess } from '../slice/getUnVerifiedCollegeSlice';
@@ -74,5 +75,15 @@ export const delCollege = id => async(dispatch) => {
         dispatch(delCollegeSuccess(data));
     } catch (error) {
         dispatch(delCollegeFail(error.response.message));
+    }
+}
+
+export const countCollege = async(dispatch) => {
+    try {
+        dispatch(countCollegeRequest());
+        const { data } = await axios.get('http://localhost:5000/api/count/college');
+        dispatch(countCollegeSuccess(data));
+    } catch (error) {
+        dispatch(countCollegeFail(error.response.message));
     }
 }
