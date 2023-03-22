@@ -93,7 +93,7 @@ export const delParticipate = id => async(dispatch) => {
 export const delSingleParticipate = id => async(dispatch) => {
     try{
         dispatch(delSingleParticipateRequest());
-        const { data } = await axios.delete(`http://localhost:5000/api/delete/participate/${id}`);
+        const { data } = await axios.delete(`http://localhost:5000/api/delete/singleparticipate/${id}`);
         dispatch(delSingleParticipateSuccess(data));
     } catch (error) {
         dispatch(delSingleParticipateFail(error.response.message));
