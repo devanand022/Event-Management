@@ -1,24 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Card, Form, Table } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { allEvent } from '../../../../../actions/eventAction'
 
 const Event = () => {
+
+  const dispatch = useDispatch()
+  const { events } = useSelector((state) => state.allEventState)
+  const [event_name, setEvent_name] = useState("")
+
+  const inactiveEvent = (id) => {
+    
+  }
+
+  const activeEvent = (id) => {
+    
+  }
+
+  useEffect(() => {
+    dispatch(allEvent)
+  }, [dispatch])
+
   return (
-    <Card style={{width: '100%', height: '88vh', border: 'none', display: 'flex', alignItems: 'center'}}>
-      <Card 
+    <Card style={{ width: '100%', height: '88vh', border: 'none', display: 'flex', alignItems: 'center' }}>
+      <Card
         className='mb-3'
-        style={{width: '97%', height: '20vh', display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center', border: 'none'}}>
-        <Card style={{width: '70%', height: '18vh', border: 'none'}}>
+        style={{ width: '97%', height: '20vh', display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center', border: 'none' }}>
+        <Card style={{ width: '70%', height: '18vh', border: 'none' }}>
           <h3 className='mb-3 mx-3 my-1'>Add Event</h3>
-          <Form className='d-flex' style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-            <Form.Group style={{width: '85%'}}>
-              <Form.Control placeholder='Enter the event name' />
+          <Form className='d-flex' style={{ flexDirection: 'row', justifyContent: 'start' }}>
+            <Form.Group style={{ width: '65%' }}>
+              <Form.Control placeholder='Enter the event name' value={event_name} onChange={e => setEvent_name(e.target.value)} />
             </Form.Group>
-            <Button style={{width: '10%'}}>Add</Button>
+            <Button style={{ width: '10%' }} type='submit' className='mx-2' >Add</Button>
           </Form>
         </Card>
       </Card>
-      <Card style={{width: '97%', height: '68vh', border: 'none', display: 'flex', alignItems: 'center'}}>
-        <Table striped borderless hover style={{width : '97%'}}>
+      <Card style={{ width: '97%', height: '68vh', border: 'none', display: 'flex', alignItems: 'center', overflowY: 'scroll' }}>
+        <Table striped borderless hover style={{ width: '97%' }}>
           <thead>
             <tr>
               <th>Event Name</th>
@@ -26,10 +45,16 @@ const Event = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Event 1</td>
-              <td><Button variant='success' style={{width: '20%'}}>Active</Button></td>
-            </tr>
+            {
+              events && events.map(x => (
+                <tr>
+                  <td>{x.name}</td>
+                  { x.status ===1 ? 
+                    <td><Button variant='success' onClick={inactiveEvent(x.id)} style={{ width: '20%' }}>Active</Button></td> : 
+                      <td><Button variant='danger' onClick={activeEvent(x.id)} style={{ width: '20%' }}>inActive</Button></td> }
+                </tr>
+              ))
+            }
           </tbody>
         </Table>
       </Card>
