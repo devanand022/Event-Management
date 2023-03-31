@@ -20,6 +20,14 @@ import selectEventReducer from './slice/selectEvent';
 import countCollegeReducer from './slice/countCollege';
 import countParticipateReducer from './slice/countParticipate';
 import allEventReducer from './slice/allEventSlice';
+import activeEventReducer from './slice/activeEventSlice';
+import inactiveEventReducer from './slice/inactiveEventSlice';
+import addEventReducer from './slice/addEventSlice';
+import addReguserReducer from './slice/addReg_userSlice';
+import getReguserReducer from './slice/getReguserSlice';
+import inactiveReguserReducer from './slice/inactiveReguserSlice';
+import activeReguserReducer from './slice/activeReguserSlice';
+import addStaffuserReducer from './slice/addStaffuserSlice';
 
 const reducer = combineReducers({
     collegeState: collegeReducer,
@@ -41,7 +49,15 @@ const reducer = combineReducers({
     selectEventState: selectEventReducer,
     countCollegeState: countCollegeReducer,
     countParticipateState: countParticipateReducer,
-    allEventState: allEventReducer
+    allEventState: allEventReducer,
+    activeEventState: activeEventReducer,
+    inactiveEventState: inactiveEventReducer,
+    addEventState: addEventReducer,
+    addReguserState: addReguserReducer,
+    getReguserState: getReguserReducer,
+    inactiveReguserState: inactiveReguserReducer,
+    activeReguserState: activeReguserReducer,
+    addStaffuserState: addStaffuserReducer
 })
 
 const store = configureStore({
