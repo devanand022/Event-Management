@@ -10,6 +10,9 @@ import { getReguserFail, getReguserRequest, getReguserSuccess } from '../slice/g
 import { inactiveReguserFail, inactiveReguserRequest, inactiveReguserSuccess } from '../slice/inactiveReguserSlice';
 import { activeReguserFail, activeReguserRequest, activeReguserSuccess } from '../slice/activeReguserSlice';
 import { addStaffuserFail, addStaffuserRequest, addStaffuserSuccess } from '../slice/addStaffuserSlice';
+import { getStaffuserFail, getStaffuserRequest, getStaffuserSuccess } from '../slice/getStaffuserSlice';
+import { inactiveStaffFail, inactiveStaffRequest, inactiveStaffSuccess } from '../slice/inactiveStaffSlice';
+import { activeStaffFail, activeStaffRequest, activeStaffSuccess } from '../slice/activeStaffSlice';
 
 export const getEvent = async(dispatch) => {
     try {
@@ -118,5 +121,35 @@ export const addStaffusers = (user, pass, event_name) => async(dispatch) => {
         dispatch(addStaffuserSuccess(data));
     } catch (error) {
         dispatch(addStaffuserFail(error.response.data.message))
+    }
+}
+
+export const getStaffuser = async(dispatch) => {
+    try {
+        dispatch(getStaffuserRequest());
+        const { data } = await axios.get('http://localhost:5000/api/getstaffuser');
+        dispatch(getStaffuserSuccess(data));
+    } catch (error) {
+        dispatch(getStaffuserFail(error.response.data.message));
+    }
+}
+
+export const inactiveStaffs = id => async(dispatch) => {
+    try {
+        dispatch(inactiveStaffRequest());
+        const { data } = await axios.put(`http://localhost:5000/api/inactive/staff/${id}`);
+        dispatch(inactiveStaffSuccess(data));
+    } catch (error) {
+        dispatch(inactiveStaffFail(error.response.data.message));
+    }
+}
+
+export const activeStaffs = id => async(dispatch) => {
+    try {
+        dispatch(activeStaffRequest());
+        const { data } = await axios.put(`http://localhost:5000/api/active/staff/${id}`);
+        dispatch(activeStaffSuccess(data));
+    } catch (error) {
+        dispatch(activeStaffFail(error.response.data.message));
     }
 }

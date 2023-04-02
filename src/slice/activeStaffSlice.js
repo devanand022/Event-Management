@@ -1,23 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const activeReguserSlice = createSlice({
-    name : 'activereguser',
+const activeStaffSlice = createSlice({
+    name : 'activestaff',
     initialState : {
         loading: false,
     },
     reducers :{
-        activeReguserRequest(state, action){
+        activeStaffRequest(state, action){
             return {
                 loading: true
             }
         },
-        activeReguserSuccess(state, action){
+        activeStaffSuccess(state, action){
             return {
                 loading: false,
                 message: action.payload.message
             }
         },
-        activeReguserFail(state, action){
+        activeStaffFail(state, action){
             return {
                 loading: false,
                 error: action.payload
@@ -26,8 +26,8 @@ const activeReguserSlice = createSlice({
     }
 });
 
-const { actions, reducer } = activeReguserSlice;
+const { actions, reducer } = activeStaffSlice;
 
-export const { activeReguserRequest, activeReguserSuccess, activeReguserFail } = actions;
+export const { activeStaffRequest, activeStaffSuccess, activeStaffFail } = actions;
 
 export default reducer;

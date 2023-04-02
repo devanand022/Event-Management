@@ -1,39 +1,48 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+// import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const Signup = () => {
+
+    const [college_name, setCollege_name] = useState("");
+    const [email, setEmail] = useState("");
+    const [depart, setDepart] = useState("");
+    const [password, setPassword] = useState("");
+
+    const singupform = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/api/reguser', { college_name, email, depart, password })
+            .then(res => {
+                const message = "successfully Registered"
+                return toast.info(message, {
+                    position: toast.POSITION.BOTTOM_CENTER
+                })
+            })
+            .catch(error => {
+                return toast.info(error, {
+                    position: toast.POSITION.BOTTOM_CENTER
+                })
+            });
+    }
+
     return (
-        <Form>
+        <Form onSubmit={singupform}>
             <Form.Group className="mb-3">
-                <Form.Control placeholder="Enter Your College Name" name="college_name" />
+                <Form.Control placeholder="Enter Your College Name" name="college_name" value={college_name} onChange={e => setCollege_name(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Control type="email" placeholder="Enter Your Email Address" name="email" />
+                <Form.Control type="email" placeholder="Enter Your Email Address" name="email" value={email} onChange={e => setEmail(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Control placeholder="Enter Your Department Name" name="Department" />
+                <Form.Control placeholder="Enter Your Department Name" name="Department" value={depart} onChange={e => setDepart(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Control type="password" placeholder="Enter Your New Password" name="password" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Control placeholder="Confirm Your Password" name="cpassword" />
-            </Form.Group>
-            <Form.Group className="d-flex justify-content-evenly mb-3">
-                <Form.Group className="col-3">
-                    <Form.Check label="UG" name="ug/pg" type="radio" />
-                    <Form.Check label="PG" name="ug/pg" type="radio" />
-                </Form.Group>
-                <Form.Group className="col-3">
-                    <Form.Check label="SF" name="sf/aided" type="radio" />
-                    <Form.Check label="Aided" name="sf/aided" type="radio" />
-                </Form.Group>
+                <Form.Control type="password" placeholder="Enter Your New Password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <div className="mt-4 text-center">
-                <Link to="participate/dashboard">
-                    <Button type="submit" variant="none" style={{background: '#5544AE', color: 'white'}}>Signup</Button>
-                </Link>
+                <Button type="submit" variant="none" style={{ background: '#5544AE', color: 'white' }}>Signup</Button>
             </div>
         </Form>
     )

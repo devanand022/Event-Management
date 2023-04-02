@@ -14,7 +14,7 @@ const inactiveReguserSlice = createSlice({
         inactiveReguserSuccess(state, action){
             return {
                 loading: false,
-                reguser: action.payload.reguser
+                message: action.payload.message
             }
         },
         inactiveReguserFail(state, action){
