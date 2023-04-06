@@ -2,18 +2,18 @@ import React, { useEffect } from 'react'
 import { Card, Table } from 'react-bootstrap'
 import jwtDecode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
-import { finalresults } from '../../../../actions/eventAction'
+import { filterevents } from '../../../../../../actions/eventAction'
 
-const FinalsTab2 = () => {
+const PrelimsTab2 = () => {
 
     const token = localStorage.getItem("userInfo")
     let decodetoken = jwtDecode(token);
-    const event = decodetoken.data[0]?.event;
+    const event = localStorage.getItem("event")
     const dispatch = useDispatch()
-    const { finalresult } = useSelector((state) => state.finalResultState);
+    const { filterevent } = useSelector((state) => state.filtereventState);
 
     useEffect(() => {
-        dispatch(finalresults(event));
+        dispatch(filterevents(event))
     }, [dispatch])
 
     return (
@@ -26,15 +26,14 @@ const FinalsTab2 = () => {
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>College Name</th>
+                                <th>Lot NO</th>
                                 <th>Email</th>
                                 <th>Event</th>
                                 <th>Status</th>
-                                <th>Rank</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {finalresult && finalresult.map(x => (
+                            {filterevent && filterevent.map(x => (
                                 <tr>
                                     <td>{x.id}</td>
                                     <td>{x.name}</td>
@@ -45,14 +44,9 @@ const FinalsTab2 = () => {
                                             <td>{x.event1}</td> : <td>{x.event2}</td>
                                     }
                                     {
-                                        x.event1result == 'selected' ?
-                                            <td>{x.event1result}</td> : <td>{x.event2result}</td>
-                                    }
-                                    {
-                                        x.event1 == event && x.event1result == 'selected' ?
-                                                (x.event1final == 'first' || x.event1final == 'second' || x.event1final == 'third') ? <td>{x.event1final}</td> : <td></td>
-                                             : (x.event2final == 'first' || x.event2final == 'second' || x.event2final == 'third') ? <td>{x.event2final}</td> : <td></td>
-                                    }
+                                            x.event1result == 'selected' ?
+                                                <td>{x.event1result}</td> : <td>{x.event2result}</td>
+                                        }
                                 </tr>
                             ))}
                         </tbody>
@@ -63,4 +57,4 @@ const FinalsTab2 = () => {
     )
 }
 
-export default FinalsTab2
+export default PrelimsTab2

@@ -1,49 +1,52 @@
-import React, { useState, useEffect } from 'react'
-import { Col, Container, Row, Card, Table } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Container, Card, Row, Col, Button, Table } from 'react-bootstrap'
 import image from '../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md'
+import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
-import './StaffPage.css'
-import jwtDecode from 'jwt-decode'
-import { staffEvents } from '../../actions/eventAction'
+import '../Reg_Committee/Pages/Add/Add.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { delSingleParticipate, singleCollege } from '../../actions/participateAction'
+import jwtDecode from 'jwt-decode'
 
-const Staffpage = () => {
-    const [show, setShow] = useState(false)
+const Participate = () => {
+
+    const [show, setShow] = useState(false);
+    const dispatch = useDispatch();
+    const { collegedetails } = useSelector((state) => state.singleCollegeState);
     const token = localStorage.getItem("userInfo")
     let decodetoken = jwtDecode(token);
-    const event = decodetoken.data[0]?.event;
-    const dispatch = useDispatch()
-    const { staffevent } = useSelector((state) => state.staffEventState)
+    const id = decodetoken.data[0]?.lot_no
 
     const logout = () => {
         localStorage.removeItem("userInfo")
     }
 
+    const del = (id) => {
+        dispatch(delSingleParticipate(id));
+        setTimeout(() => dispatch(singleCollege(id)), 500);
+    }
+
     const menuItem = [
         {
-            path: "/event/dashboard",
+            path: "/participate/list",
             icon: <MdIcons.MdDashboard size={25} className='m-2' />,
-            name: "Dashboard"
+            name: "List"
         },
         {
-            path: "/event/prelims",
-            icon: <FaIcons.FaClipboardList size={25} className='m-2' />,
-            name: "Perlims"
-        },
-        {
-            path: "/event/final",
-            icon: <MdIcons.MdEmojiEvents size={25} className='m-2' />,
-            name: "Final"
-        },
+            path: "/participate/add",
+            icon: <IoIcons.IoMdAdd size={25} className='m-2' />,
+            name: "Add"
+        }
     ];
 
     useEffect(() => {
-        dispatch(staffEvents(event))
+        dispatch(singleCollege(id));
     }, [dispatch])
+
     return (
-        <Container fluid className='adminpage'>
+        <Container fluid className='addpage'>
             <Row>
                 <Col>
                     <Card className="sidebar" style={{ height: '100vh', width: show ? '260px' : '80px', border: 'none' }}>
@@ -59,8 +62,8 @@ const Staffpage = () => {
                                                 <img src={image} alt="profile" style={{ borderRadius: '100%', height: '40px', width: '40px' }} />
                                             </Card>
                                             <Card className="m-2" style={{ width: '150px', border: 'none' }}>
-                                                <h5>{decodetoken.data[0]?.username}</h5>
-                                                <span>{event}</span>
+                                                <h5>{decodetoken.data[0]?.college_name}</h5>
+                                                <span>Participate</span>
                                             </Card>
                                         </Card>
                                     ) : null
@@ -104,37 +107,43 @@ const Staffpage = () => {
                     </Card>
                 </Col>
                 <Col className='rightside'>
-                    <Card style={{ height: '97vh', width: show ? '1065px' : '1249px', transition: 'ease-in-out 0.2s', border: 'none', alignItems: 'center' }}>
-                        <Card style={{ height: '85vh', width: '97%', border: 'none' }}>
-                            <h3 className='mx-3 my-3'>Student List</h3>
-                            <Card style={{ height: '85vh', width: '100%', display: 'flex', alignItems: 'center', border: 'none' }}>
-                                <Table striped borderless hover>
-                                    <thead>
+                    <Card style={{ height: '97vh', width: show ? '1075px' : '1255px', transition: 'ease-in-out 0.2s', border: 'none' }} className="partcontent">
+                        <h2 className='m-2'>Particiaptes Details</h2>
+                        <Card style={{ width: '100%', height: '78vh', border: 'none', overflowY: 'scroll' }} className='participatetable'>
+                            <Table striped borderless hover style={{ width: show ? '1050px' : '1230px' }}>
+                                <thead>
+                                    <tr>
+                                        <th>Lot No</th>
+                                        <th>Name</th>
+                                        <th>Contact</th>
+                                        <th>Email</th>
+                                        <th>Event</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {collegedetails && collegedetails.map(x => (
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Lot No</th>
-                                            <th>Email</th>
-                                            <th>Event</th>
+                                            <td>{x.lot_no}</td>
+                                            <td>{x.name}</td>
+                                            <td>{x.phone}</td>
+                                            <td>{x.email}</td>
+                                            <td>
+                                                <div className="d-flex flex-column">
+                                                    <span>{x.event1}</span>
+                                                    <span>{x.event2}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="d-flex justify-content-evenly">
+                                                    <Link to={`/part/edit/participate/${x.id}`}><Button>Edit</Button></Link>
+                                                    <Button variant="danger" onClick={() => del(x.id)}>Delete</Button>
+                                                </div>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            staffevent && staffevent.map(x => (
-                                                <tr>
-                                                    <td>{x.id}</td>
-                                                    <td>{x.name}</td>
-                                                    <td>{x.lot_no}</td>
-                                                    <td>{x.email}</td>
-                                                    {
-                                                        x.event1 == event ? <td>{x.event1}</td> : <td>{x.event2}</td>
-                                                    }
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </Table>
-                            </Card>
+                                    ))}
+                                </tbody>
+                            </Table>
                         </Card>
                     </Card>
                 </Col>
@@ -142,5 +151,4 @@ const Staffpage = () => {
         </Container>
     )
 }
-
-export default Staffpage
+export default Participate

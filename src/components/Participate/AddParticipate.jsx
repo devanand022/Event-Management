@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap'
-import image from '../../../../Assets/Images/download.jfif'
+import image from '../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md'
 import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
-import './Add.css'
-import { createCollege, getCollege } from '../../../../actions/collegeAction'
+import '../Reg_Committee/Pages/Add/Add.css'
+import { createCollege, getCollege } from '../../actions/collegeAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
-import { getEvent } from '../../../../actions/eventAction'
-import { createParticipates } from '../../../../actions/participateAction'
+import { getEvent } from '../../actions/eventAction'
+import { createParticipates } from '../../actions/participateAction'
 import jwtDecode from 'jwt-decode'
 
-const Add = () => {
+const AddParticipate = () => {
 
   const [show, setShow] = useState(false);
   const { message } = useSelector((state) => state.collegeState);
@@ -23,10 +23,7 @@ const Add = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("userInfo")
   let decodetoken = jwtDecode(token);
-
-  const logout = () => {
-    localStorage.removeItem("userInfo")
-  }
+  const college = decodetoken.data[0]?.lot_no;
   const initialState = {
     name: "",
     college: "",
@@ -37,14 +34,10 @@ const Add = () => {
     event1: "",
     event2: ""
   }
-
   const [add, setAdd] = useState([initialState]);
-  const [college_name, setCollege] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createCollege(college_name));
-    setCollege("")
+  const logout = () => {
+    localStorage.removeItem("userInfo")
   }
 
   const handleInputChange = (e, i) => {
@@ -88,30 +81,15 @@ const Add = () => {
 
   const menuItem = [
     {
-      path: "/reg/dashboard",
+      path: "/participate/list",
       icon: <MdIcons.MdDashboard size={25} className='m-2' />,
-      name: "Dashboard"
+      name: "List"
     },
     {
-      path: "/reg/add",
+      path: "/participate/add",
       icon: <IoIcons.IoMdAdd size={25} className='m-2' />,
       name: "Add"
-    },
-    {
-      path: "/reg/college",
-      icon: <FaIcons.FaUniversity size={25} className='m-2' />,
-      name: "College"
-    },
-    {
-      path: "/reg/participate",
-      icon: <IoIcons.IoMdPerson size={25} className='m-2' />,
-      name: "Participates"
-    },
-    {
-      path: "/reg/event",
-      icon: <MdIcons.MdEvent size={25} className='m-2' />,
-      name: "Event"
-    },
+    }
   ];
 
   return (
@@ -131,8 +109,8 @@ const Add = () => {
                         <img src={image} alt="profile" style={{ borderRadius: '100%', height: '40px', width: '40px' }} />
                       </Card>
                       <Card className="m-2" style={{ width: '150px', border: 'none' }}>
-                        <h5>{decodetoken.data[0]?.user_name}</h5>
-                        <span>Reg Committee</span>
+                        <h5>{decodetoken.data[0]?.college_name}</h5>
+                        <span>Participate</span>
                       </Card>
                     </Card>
                   ) : null
@@ -181,15 +159,9 @@ const Add = () => {
             className="addcontent"
           >
             <h2 className='mx-3 my-2'>Add Participates</h2>
-            <Form onSubmit={handleSubmit} className='justify-content-center align-items-center d-flex' style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className="justify-content-center align-items-center d-flex add-top">
+            <Form className='justify-content-center align-items-center d-flex' style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="add-top">
                 <Form.Group className='mb-3 mt-2 add-top-group'>
-                  <Form.Control placeholder='Enter Your College Name' value={college_name} onChange={e => setCollege(e.target.value)} style={{ width: '500px' }} />
-                </Form.Group>
-                <Form.Group className='mb-3 mt-2 m-2'>
-                  <Button variant='none' type='submit' style={{ width: '150px', background: '#5544AE', color: 'white' }} >Add</Button>
-                </Form.Group>
-                <Form.Group className='mb-3 mt-2 add-top-group' style={{ justifyContent: 'flex-end', display: 'flex' }}>
                   <Button variant='none' style={{ width: '150px', background: '#5544AE', color: 'white' }} onClick={handleClick} >New</Button>
                 </Form.Group>
               </div>
@@ -217,7 +189,7 @@ const Add = () => {
                               <option value=''>Select</option>
                               {
                                 getColleges && getColleges.map(getCollege => (
-                                  <option value={getCollege.lot_no}>{getCollege.college_name}</option>
+                                  getCollege.lot_no == college ? <option value={getCollege.lot_no}>{getCollege.college_name}</option> : null
                                 ))
                               }
                             </Form.Select>
@@ -299,4 +271,4 @@ const Add = () => {
     </Container>
   )
 }
-export default Add
+export default AddParticipate

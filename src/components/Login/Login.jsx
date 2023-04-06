@@ -13,43 +13,52 @@ const Login = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    if (role == 'participate'){
-      
-    }
-    if (role == 'reg'){
-      axios.post('http://localhost:5000/api/regloginuser', {email, password}).then((data) => {
-        if(data.data.status == 200){
+    if (role == 'participate') {
+      axios.post('http://localhost:5000/api/partloginuser', { email, password }).then((data) => {
+        if (data.data.status == 200) {
           localStorage.setItem("userInfo", data.data.token);
           const message = data.data.message;
-          toast.info(message, {position: toast.POSITION.BOTTOM_CENTER})
+          toast.info(message, { position: toast.POSITION.BOTTOM_CENTER })
+          navigate('/participate/list')
+        } else {
+          toast.error(data.data.message, { position: toast.POSITION.BOTTOM_CENTER })
+        }
+      })
+    }
+    if (role == 'reg') {
+      axios.post('http://localhost:5000/api/regloginuser', { email, password }).then((data) => {
+        if (data.data.status == 200) {
+          localStorage.setItem("userInfo", data.data.token);
+          const message = data.data.message;
+          toast.info(message, { position: toast.POSITION.BOTTOM_CENTER })
           navigate('/reg/dashboard')
-        }else{
-          toast.error(data.data.message, {position: toast.POSITION.BOTTOM_CENTER})
+        } else {
+          toast.error(data.data.message, { position: toast.POSITION.BOTTOM_CENTER })
         }
       })
     }
-    if (role == 'staff'){
-      axios.post('http://localhost:5000/api/staffloginuser', {email, password}).then((data) => {
-        if(data.data.status == 200){
+    if (role == 'staff') {
+      axios.post('http://localhost:5000/api/staffloginuser', { email, password }).then((data) => {
+        if (data.data.status == 200) {
           localStorage.setItem("userInfo", data.data.token);
           const message = data.data.message;
-          toast.info(message, {position: toast.POSITION.BOTTOM_CENTER})
+          toast.info(message, { position: toast.POSITION.BOTTOM_CENTER })
           navigate('/event/dashboard')
-        }else{
-          toast.error(data.data.message, {position: toast.POSITION.BOTTOM_CENTER})
+        } else {
+          toast.error(data.data.message, { position: toast.POSITION.BOTTOM_CENTER })
         }
       })
     }
-    if (role == 'admin'){
+    if (role == 'admin') {
       console.log(email, password);
-      axios.post('http://localhost:5000/api/adminloginuser', {email, password}).then((data) => {
-        if(data.data.status == 200){
+      axios.post('http://localhost:5000/api/adminloginuser', { email, password }).then((data) => {
+        if (data.data.status == 200) {
           localStorage.setItem("userInfo", data.data.token);
           const message = data.data.message;
-          toast.info(message, {position: toast.POSITION.BOTTOM_CENTER})
+          toast.info(message, { position: toast.POSITION.BOTTOM_CENTER })
           navigate('/admin/dashboard')
-        }else{
-          toast.error(data.data.message, {position: toast.POSITION.BOTTOM_CENTER})
+        } else {
+          toast.error(data.data.message, { position: toast.POSITION.BOTTOM_CENTER })
         }
       })
     }

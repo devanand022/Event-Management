@@ -6,12 +6,15 @@ import * as MdIcons from 'react-icons/md'
 import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import './AdminCollege.css'
-import AdminCollegeTab1 from './AdminCollegeTab1'
-import AdminCollegeTab2 from './AdminCollegeTab2'
+import CollegeTab1 from './CollegeTab1'
+import CollegeTab2 from './CollegeTab2'
+import jwtDecode from 'jwt-decode'
 
 const AdminCollege = () => {
 
   const [show, setShow] = useState(false)
+  const token = localStorage.getItem("userInfo")
+  let decodetoken = jwtDecode(token);
 
   const menuItem = [
     {
@@ -57,7 +60,7 @@ const AdminCollege = () => {
                         <img src={image} alt="profile" style={{ borderRadius: '100%', height: '40px', width: '40px' }} />
                       </Card>
                       <Card className="m-2" style={{ width: '150px', border: 'none' }}>
-                        <h5>User1</h5>
+                        <h5>{decodetoken.data[0]?.user_name}</h5>
                         <span>Reg Committee</span>
                       </Card>
                     </Card>
@@ -87,7 +90,7 @@ const AdminCollege = () => {
               }
             </Card>
             <Card className='card-end' style={{ width: show ? '260px' : '80px', height: '79px', border: 'none' }}>
-              <Link to='/admin/dashboard' style={{textDecoration: 'none'}}>
+              <Link to='/admin/dashboard'>
                 <Card
                   className='card-items'
                   style={{ height: '45px', display: 'flex', flexDirection: 'row', width: show ? '230px' : '45px', border: 'none ' }}
@@ -110,10 +113,10 @@ const AdminCollege = () => {
               style={{background: '#FFFA65'}}
             >
               <Tab eventKey="verified" title="Verified College" style={{borderRadius: '10px'}}>
-                <AdminCollegeTab1 show={show} />
+                <CollegeTab1 show={show} />
               </Tab>
               <Tab eventKey="unverified" title="Unverified College" style={{borderRadius: '10px'}}>
-                <AdminCollegeTab2  show={show}/>
+                <CollegeTab2  show={show}/>
               </Tab>
             </Tabs>
           </Card>

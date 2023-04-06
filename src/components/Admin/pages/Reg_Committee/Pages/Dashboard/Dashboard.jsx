@@ -3,8 +3,8 @@ import { Card, Row, Col } from 'react-bootstrap'
 import * as IoIcons from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { countCollege } from '../../../../actions/collegeAction'
-import { countParticipate } from '../../../../actions/participateAction'
+import { countCollege } from '../../../../../../actions/collegeAction'
+import { countParticipate } from '../../../../../../actions/participateAction'
 import './Dashboard.css'
 
 const Dashboard = ({show}) => {

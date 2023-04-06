@@ -22,7 +22,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import CollegeDetails from './components/Reg_Committee/Pages/College/CollegeDetails';
 import EditParticipate from './components/Reg_Committee/Pages/Participates/EditParticipate';
-
+import EventPage from './components/StaffEvent/EventPage';
+import AddParticipate from './components/Participate/AddParticipate';
+import Participate from './components/Participate/Participate';
+import Editpart from './components/Participate/Editpart';
 
 function App() {
   return (
@@ -30,12 +33,15 @@ function App() {
       <ToastContainer theme='dark' />
       <Routes>
         <Route path="/" element={<Toggle />} />
+        <Route path='/participate/add' element={<AddParticipate />} />
+        <Route path='/participate/list' element={<Participate />} />
         <Route path="/reg/dashboard" element={<MainPage />} />
         <Route path='/reg/add' element={<Add />} />
         <Route path='/reg/college' element={<College />} />
         <Route path='/reg/singlecollege/:id' element={<CollegeDetails />} />
         <Route path='/reg/participate' element={<Participates />} />
         <Route path='/reg/edit/participate/:id' element={<EditParticipate />} />
+        <Route path='/part/edit/participate/:id' element={<Editpart />} />
         <Route path='/reg/event' element={<Event />} />
         <Route path='/admin/dashboard' element={<Adminpage />} />
         <Route path='/admin/settings' element={<Settings />} />
@@ -47,6 +53,7 @@ function App() {
         <Route path='/event/dashboard' element={<StaffPage />} />
         <Route path='/event/prelims' element={<Prelims />} />
         <Route path='/event/final' element={<Finals />} />
+        <Route path='/admin/event/select' element={<EventPage />} />
         <Route path='/admin/event/dashboard' element={<AdminStaff />} />
         <Route path='/admin/event/prelims' element={<AdminPrelims />} />
         <Route path='/admin/event/final' element={<AdminFinals />} />

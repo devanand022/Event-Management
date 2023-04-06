@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Card } from 'react-bootstrap'
 import image from '../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
@@ -8,16 +8,40 @@ import * as FiIcons from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import './Adminpage.css'
 import jwtDecode from 'jwt-decode'
+import { useDispatch, useSelector } from 'react-redux'
+import { countCollege } from '../../actions/collegeAction'
+import { countParticipate } from '../../actions/participateAction'
 
 const Adminpage = () => {
     const [show, setShow] = useState(false)
     const token = localStorage.getItem("userInfo")
     let decodetoken = jwtDecode(token);
-    const event = decodetoken.data[0]?.event;
+    // const event = decodetoken.data[0]?.event
 
     const logout = () => {
         localStorage.removeItem("userInfo")
-      }
+    }
+
+    const dispatch = useDispatch();
+    const { participatecount } = useSelector((state) => state.countParticipateState);
+    const { collegecount } = useSelector((state) => state.countCollegeState);
+    const [pname, setPname] = useState("");
+    const [cname, setCname] = useState("");
+
+    useEffect(() => {
+        dispatch(countCollege);
+        dispatch(countParticipate);
+    }, [dispatch]);
+
+    useEffect(() => {
+        participatecount && participatecount.map(x => (
+            setPname(x.pname)
+        ));
+
+        collegecount && collegecount.map(x => (
+            setCname(x.cname)
+        ))
+    }, [participatecount, collegecount])
 
     const menuItem = [
         {
@@ -31,7 +55,7 @@ const Adminpage = () => {
             name: "Registration"
         },
         {
-            path: "/admin/event/dashboard",
+            path: "/admin/event/select",
             icon: <MdIcons.MdEvent size={25} className='m-2' />,
             name: "Event Management"
         },
@@ -117,7 +141,7 @@ const Adminpage = () => {
                                 <Link to='/admin/reg/college' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Card className='dashcards' style={{ height: '200px' }}>
                                         <h4 className='mx-3 my-2'>College</h4>
-                                        <h4>12</h4>
+                                        <h4>{cname}</h4>
                                     </Card>
                                 </Link>
                             </Col>
@@ -125,22 +149,13 @@ const Adminpage = () => {
                                 <Link to='/admin/reg/participate' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Card className='dashcards' style={{ height: '200px' }}>
                                         <h4 className='mx-3 my-2'>Participates</h4>
-                                        <h4>30</h4>
+                                        <h4>{pname}</h4>
                                     </Card>
                                 </Link>
                             </Col>
                         </Row>
                         <Row style={{ width: show ? '1075px' : '1255px', transition: 'ease-in-out 0.2s' }} className='dashtop'>
-                            <Col>
-                                <Card className='dashseccards' style={{ height: '320px', width: show ? '600px' : '700px' }}>
 
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card className='dashseccards' style={{ height: '320px' }}>
-
-                                </Card>
-                            </Col>
                         </Row>
                     </Card>
                 </Col>

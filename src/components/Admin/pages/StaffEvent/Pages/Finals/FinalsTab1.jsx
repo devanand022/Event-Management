@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { Card, Table, Button } from 'react-bootstrap'
 import jwtDecode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterevents, update1firsts, update1s, update1seconds, update1thirds, update2firsts, update2s, update2seconds, update2thirds } from '../../../../actions/eventAction'
+import { filterevents, update1firsts, update1s, update1seconds, update1thirds, update2firsts, update2s, update2seconds, update2thirds } from '../../../../../../actions/eventAction'
 
 const FinalsTab1 = () => {
 
     const token = localStorage.getItem("userInfo")
     let decodetoken = jwtDecode(token);
-    const event = decodetoken.data[0]?.event;
+    const event = localStorage.getItem("event")
     const dispatch = useDispatch()
     const { filterevent } = useSelector((state) => state.filtereventState);
 

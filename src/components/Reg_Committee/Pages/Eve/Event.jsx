@@ -8,12 +8,19 @@ import { Link } from 'react-router-dom'
 import './Event.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEvent, selectEvent } from '../../../../actions/eventAction'
+import jwtDecode from 'jwt-decode'
 
 const Event = () => {
 
   const [show, setShow] = useState(false);
   const [event, setEvent] = useState("");
   const dispatch = useDispatch();
+  const token = localStorage.getItem("userInfo")
+  let decodetoken = jwtDecode(token);
+
+  const logout = () => {
+    localStorage.removeItem("userInfo")
+  }
 
   const Search = (e) => {
     e.preventDefault();
@@ -71,7 +78,7 @@ const Event = () => {
                         <img src={image} alt="profile" style={{ borderRadius: '100%', height: '40px', width: '40px' }} />
                       </Card>
                       <Card className="m-2" style={{ width: '150px', border: 'none' }}>
-                        <h5>User1</h5>
+                        <h5>{decodetoken.data[0]?.user_name}</h5>
                         <span>Reg Committee</span>
                       </Card>
                     </Card>
@@ -103,7 +110,7 @@ const Event = () => {
             <Card className='card-end' style={{ width: show ? '260px' : '80px', height: '79px', border: 'none' }}>
               <Link to='/'>
                 <Card
-                  className='card-items'
+                  className='card-items' onClick={logout}
                   style={{ height: '45px', display: 'flex', flexDirection: 'row', width: show ? '230px' : '45px', border: 'none ' }}
                 >
                   <MdIcons.MdLogout size={25} className='m-2' />

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { Card, Table, Button } from 'react-bootstrap'
 import jwtDecode from 'jwt-decode'
-import { selectEvent1s, selectEvent2s, staffEvents, unselectEvent1s, unselectEvent2s } from '../../../../actions/eventAction'
+import { selectEvent1s, selectEvent2s, staffEvents, unselectEvent1s, unselectEvent2s } from '../../../../../../actions/eventAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 const PrelimsTab1 = () => {
 
     const token = localStorage.getItem("userInfo")
     let decodetoken = jwtDecode(token);
-    const event = decodetoken.data[0]?.event;
+    const event = localStorage.getItem("event");
     const dispatch = useDispatch()
     const { staffevent } = useSelector((state) => state.staffEventState)
 

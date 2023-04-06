@@ -15,7 +15,11 @@ const Signup = () => {
         e.preventDefault();
         axios.post('http://localhost:5000/api/reguser', { college_name, email, depart, password })
             .then(res => {
-                const message = "successfully Registered"
+                const message = "successfully Registered";
+                setCollege_name("");
+                setEmail("");
+                setDepart("");
+                setPassword("");
                 return toast.info(message, {
                     position: toast.POSITION.BOTTOM_CENTER
                 })

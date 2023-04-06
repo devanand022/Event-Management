@@ -8,10 +8,17 @@ import { Link } from 'react-router-dom'
 import './College.css'
 import CollegeTab1 from './CollegeTab1'
 import CollegeTab2 from './CollegeTab2'
+import jwtDecode from 'jwt-decode'
 
 const College = () => {
 
   const [show, setShow] = useState(false)
+  const token = localStorage.getItem("userInfo")
+  let decodetoken = jwtDecode(token);
+
+  const logout = () => {
+    localStorage.removeItem("userInfo")
+  }
 
   const menuItem = [
     {
@@ -57,7 +64,7 @@ const College = () => {
                         <img src={image} alt="profile" style={{ borderRadius: '100%', height: '40px', width: '40px' }} />
                       </Card>
                       <Card className="m-2" style={{ width: '150px', border: 'none' }}>
-                        <h5>User1</h5>
+                        <h5>{decodetoken.data[0]?.user_name}</h5>
                         <span>Reg Committee</span>
                       </Card>
                     </Card>
@@ -89,7 +96,7 @@ const College = () => {
             <Card className='card-end' style={{ width: show ? '260px' : '80px', height: '79px', border: 'none' }}>
               <Link to='/'>
                 <Card
-                  className='card-items'
+                  className='card-items' onClick={logout}
                   style={{ height: '45px', display: 'flex', flexDirection: 'row', width: show ? '230px' : '45px', border: 'none ' }}
                 >
                   <MdIcons.MdLogout size={25} className='m-2' />

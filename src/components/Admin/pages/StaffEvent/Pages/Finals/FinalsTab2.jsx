@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { Card, Table } from 'react-bootstrap'
 import jwtDecode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
-import { finalresults } from '../../../../actions/eventAction'
+import { finalresults } from '../../../../../../actions/eventAction'
 
 const FinalsTab2 = () => {
 
     const token = localStorage.getItem("userInfo")
     let decodetoken = jwtDecode(token);
-    const event = decodetoken.data[0]?.event;
+    const event = localStorage.getItem("event")
     const dispatch = useDispatch()
     const { finalresult } = useSelector((state) => state.finalResultState);
 
