@@ -14,7 +14,7 @@ const PrelimsTab2 = () => {
 
     useEffect(() => {
         dispatch(filterevents(event))
-    }, [dispatch])
+    }, [event, dispatch])
 
     return (
         <Card style={{ height: '88vh', width: '100%', alignItems: 'center', display: 'flex', border: 'none' }}>
@@ -40,11 +40,11 @@ const PrelimsTab2 = () => {
                                     <td>{x.lot_no}</td>
                                     <td>{x.email}</td>
                                     {
-                                        x.event1 == event ?
+                                        x.event1 === event ?
                                             <td>{x.event1}</td> : <td>{x.event2}</td>
                                     }
                                     {
-                                            x.event1result == 'selected' ?
+                                            x.event1result === 'selected' ?
                                                 <td>{x.event1result}</td> : <td>{x.event2result}</td>
                                         }
                                 </tr>

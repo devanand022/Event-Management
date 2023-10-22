@@ -34,7 +34,7 @@ const PrelimsTab1 = () => {
 
     useEffect(() => {
         dispatch(staffEvents(event))
-    }, [dispatch])
+    }, [event, dispatch])
 
     return (
         <Card style={{ height: '88vh', width: '100%', alignItems: 'center', display: 'flex', border: 'none' }}>
@@ -61,20 +61,20 @@ const PrelimsTab1 = () => {
                                         <td>{x.lot_no}</td>
                                         <td>{x.email}</td>
                                         {
-                                            x.event1 == event ?
+                                            x.event1 === event ?
                                                 <td>{x.event1}</td> : <td>{x.event2}</td>
                                         }
                                         {
-                                            x.event1 == event ?
+                                            x.event1 === event ?
                                                 <td>
                                                     {
-                                                        x.event1result == null ? <Button onClick={() => selectEvent1(x.id)}>Select</Button> :
+                                                        x.event1result === null ? <Button onClick={() => selectEvent1(x.id)}>Select</Button> :
                                                             <Button variant="danger" onClick={() => unselectEvent1(x.id)}>UnSelect</Button>
 
                                                     }
                                                 </td> : <td>
                                                     {
-                                                        x.event2result == null ? <Button onClick={() => selectEvent2(x.id)}>Select</Button> :
+                                                        x.event2result === null ? <Button onClick={() => selectEvent2(x.id)}>Select</Button> :
                                                             <Button variant="danger" onClick={() => unselectEvent2(x.id)}>UnSelect</Button>
 
                                                     }

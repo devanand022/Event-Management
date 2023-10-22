@@ -41,7 +41,7 @@ const AdminStaff = () => {
 
     useEffect(() => {
         dispatch(staffEvents(event))
-    }, [dispatch])
+    }, [event, dispatch])
     return (
         <Container fluid className='adminpage'>
             <Row>
@@ -49,7 +49,7 @@ const AdminStaff = () => {
                     <Card className="sidebar" style={{ height: '100vh', width: show ? '260px' : '80px', border: 'none' }}>
                         <Card
                             className='card-top'
-                            style={{ height: '100px', border: '', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
+                            style={{ height: '100px', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
                         >
                             {
                                 show ?
@@ -127,7 +127,7 @@ const AdminStaff = () => {
                                                     <td>{x.lot_no}</td>
                                                     <td>{x.email}</td>
                                                     {
-                                                        x.event1 == event ? <td>{x.event1}</td> : <td>{x.event2}</td>
+                                                        x.event1 === event ? <td>{x.event1}</td> : <td>{x.event2}</td>
                                                     }
                                                 </tr>
                                             ))

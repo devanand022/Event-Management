@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { getEvent } from '../../actions/eventAction'
 
 const EventPage = () => {

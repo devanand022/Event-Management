@@ -6,7 +6,7 @@ import * as MdIcons from 'react-icons/md'
 import * as IoIcons from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import '../Reg_Committee/Pages/Add/Add.css'
-import { createCollege, getCollege } from '../../actions/collegeAction'
+import { getCollege } from '../../actions/collegeAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
 import { getEvent } from '../../actions/eventAction'
@@ -73,7 +73,6 @@ const AddParticipate = () => {
       return toast.info(addmessage, {
         position: toast.POSITION.BOTTOM_CENTER
       })
-      return
     }
     dispatch(getCollege);
     dispatch(getEvent);
@@ -99,7 +98,7 @@ const AddParticipate = () => {
           <Card className="sidebar" style={{ height: '100vh', width: show ? '260px' : '80px', border: 'none' }}>
             <Card
               className='card-top'
-              style={{ height: '100px', border: '', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
+              style={{ height: '100px', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
             >
               {
                 show ?
@@ -189,7 +188,7 @@ const AddParticipate = () => {
                               <option value=''>Select</option>
                               {
                                 getColleges && getColleges.map(getCollege => (
-                                  getCollege.lot_no == college ? <option value={getCollege.lot_no}>{getCollege.college_name}</option> : null
+                                  getCollege.lot_no === college ? <option value={getCollege.lot_no}>{getCollege.college_name}</option> : null
                                 ))
                               }
                             </Form.Select>

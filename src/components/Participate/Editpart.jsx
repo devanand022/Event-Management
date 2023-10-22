@@ -64,7 +64,7 @@ const Editpart = () => {
                                     <Form.Select name='college' onChange={e => setCollege(e.target.value)}>
                                         {
                                             getColleges && getColleges.map(y => (
-                                                college == y.lot_no ? <option value={y.lot_no} >{y.college_name}</option> : ''
+                                                college === y.lot_no ? <option value={y.lot_no} >{y.college_name}</option> : ''
                                             ))
                                         }
                                     </Form.Select>

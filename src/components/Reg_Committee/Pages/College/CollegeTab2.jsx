@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Card, Form, Table } from 'react-bootstrap'
+import { Button, Card, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getUnVerifiedCollege, verifyCollege, delCollege } from '../../../../actions/collegeAction'

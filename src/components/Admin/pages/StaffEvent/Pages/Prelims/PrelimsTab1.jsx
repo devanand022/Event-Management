@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { Card, Table, Button } from 'react-bootstrap'
-import jwtDecode from 'jwt-decode'
+// import jwtDecode from 'jwt-decode'
 import { selectEvent1s, selectEvent2s, staffEvents, unselectEvent1s, unselectEvent2s } from '../../../../../../actions/eventAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 const PrelimsTab1 = () => {
 
-    const token = localStorage.getItem("userInfo")
-    let decodetoken = jwtDecode(token);
+    // const token = localStorage.getItem("userInfo")
+    // let decodetoken = jwtDecode(token);
     const event = localStorage.getItem("event");
     const dispatch = useDispatch()
     const { staffevent } = useSelector((state) => state.staffEventState)
@@ -34,7 +34,7 @@ const PrelimsTab1 = () => {
 
     useEffect(() => {
         dispatch(staffEvents(event))
-    }, [dispatch])
+    }, [event, dispatch])
 
     return (
         <Card style={{ height: '88vh', width: '100%', alignItems: 'center', display: 'flex', border: 'none' }}>
@@ -68,13 +68,13 @@ const PrelimsTab1 = () => {
                                             x.event1 == event ?
                                                 <td>
                                                     {
-                                                        x.event1result == null ? <Button onClick={() => selectEvent1(x.id)}>Select</Button> :
+                                                        x.event1result === null ? <Button onClick={() => selectEvent1(x.id)}>Select</Button> :
                                                             <Button variant="danger" onClick={() => unselectEvent1(x.id)}>UnSelect</Button>
 
                                                     }
                                                 </td> : <td>
                                                     {
-                                                        x.event2result == null ? <Button onClick={() => selectEvent2(x.id)}>Select</Button> :
+                                                        x.event2result === null ? <Button onClick={() => selectEvent2(x.id)}>Select</Button> :
                                                             <Button variant="danger" onClick={() => unselectEvent2(x.id)}>UnSelect</Button>
 
                                                     }

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { Card, Table, Button } from 'react-bootstrap'
-import jwtDecode from 'jwt-decode'
+// import jwtDecode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
 import { filterevents, update1firsts, update1s, update1seconds, update1thirds, update2firsts, update2s, update2seconds, update2thirds } from '../../../../../../actions/eventAction'
 
 const FinalsTab1 = () => {
 
     const token = localStorage.getItem("userInfo")
-    let decodetoken = jwtDecode(token);
+    // let decodetoken = jwtDecode(token);
     const event = localStorage.getItem("event")
     const dispatch = useDispatch()
     const { filterevent } = useSelector((state) => state.filtereventState);
@@ -54,7 +54,7 @@ const FinalsTab1 = () => {
 
     useEffect(() => {
         dispatch(filterevents(event))
-    }, [dispatch])
+    }, [event, dispatch])
 
     return (
         <Card style={{ height: '88vh', width: '100%', alignItems: 'center', display: 'flex', border: 'none' }}>
@@ -82,19 +82,19 @@ const FinalsTab1 = () => {
                                     <td>{x.lot_no}</td>
                                     <td>{x.email}</td>
                                     {
-                                        x.event1 == event ?
+                                        x.event1 === event ?
                                             <td>{x.event1}</td> : <td>{x.event2}</td>
                                     }
                                     {
-                                        x.event1result == 'selected' ?
+                                        x.event1result === 'selected' ?
                                             <td>{x.event1result}</td> : <td>{x.event2result}</td>
                                     }
                                     {
-                                        x.event1 == event && x.event1result == 'selected' ?
+                                        x.event1 === event && x.event1result === 'selected' ?
                                             <td>{x.event1final}</td> : <td>{x.event2final}</td>
                                     }
                                     {
-                                        x.event1 == event && x.event1result == 'selected' ?
+                                        x.event1 === event && x.event1result === 'selected' ?
                                             <td>
                                                 <tr>
                                                     <td>

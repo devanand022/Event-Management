@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Card, Row, Col, Form, Table, Button } from 'react-bootstrap'
+import { Container, Card, Row, Col, Table, Button } from 'react-bootstrap'
 import image from '../../../../Assets/Images/download.jfif'
 import * as FaIcons from 'react-icons/fa'
 import * as MdIcons from 'react-icons/md'
@@ -65,7 +65,7 @@ const Participates = () => {
           <Card className="sidebar" style={{ height: '100vh', width: show ? '260px' : '80px', border: 'none' }}>
             <Card
               className='card-top'
-              style={{ height: '100px', border: '', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
+              style={{ height: '100px', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
             >
               {
                 show ?

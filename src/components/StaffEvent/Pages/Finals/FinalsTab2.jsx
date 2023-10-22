@@ -41,17 +41,17 @@ const FinalsTab2 = () => {
                                     <td>{x.lot_no}</td>
                                     <td>{x.email}</td>
                                     {
-                                        x.event1 == event ?
+                                        x.event1 === event ?
                                             <td>{x.event1}</td> : <td>{x.event2}</td>
                                     }
                                     {
-                                        x.event1result == 'selected' ?
+                                        x.event1result === 'selected' ?
                                             <td>{x.event1result}</td> : <td>{x.event2result}</td>
                                     }
                                     {
-                                        x.event1 == event && x.event1result == 'selected' ?
-                                                (x.event1final == 'first' || x.event1final == 'second' || x.event1final == 'third') ? <td>{x.event1final}</td> : <td></td>
-                                             : (x.event2final == 'first' || x.event2final == 'second' || x.event2final == 'third') ? <td>{x.event2final}</td> : <td></td>
+                                        x.event1 === event && x.event1result === 'selected' ?
+                                                (x.event1final === 'first' || x.event1final === 'second' || x.event1final === 'third') ? <td>{x.event1final}</td> : <td></td>
+                                             : (x.event2final === 'first' || x.event2final === 'second' || x.event2final === 'third') ? <td>{x.event2final}</td> : <td></td>
                                     }
                                 </tr>
                             ))}

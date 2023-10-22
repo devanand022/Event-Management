@@ -77,7 +77,6 @@ const AdminAdd = () => {
       return toast.info(addmessage, {
         position: toast.POSITION.BOTTOM_CENTER
       })
-      return
     }
     dispatch(getCollege);
     dispatch(getEvent);
@@ -118,7 +117,7 @@ const AdminAdd = () => {
           <Card className="sidebar" style={{ height: '100vh', width: show ? '260px' : '80px', border: 'none' }}>
             <Card
               className='card-top'
-              style={{ height: '100px', border: '', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
+              style={{ height: '100px', width: show ? '260px' : '80px', flexDirection: 'row', border: 'none' }}
             >
               {
                 show ?
