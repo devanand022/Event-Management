@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createFail, createRequest, createSuccess } from '../slice/AddSlice';
+import { createFail, createRequest, createSuccess } from '../slice/addSlice';
 import { countParticipateFail, countParticipateRequest, countParticipateSuccess } from '../slice/countParticipate';
 import { delParticipateFail, delParticipateRequest, delParticipateSuccess } from '../slice/delParticipateSlice';
 import { delSingleParticipateFail, delSingleParticipateRequest, delSingleParticipateSuccess } from '../slice/delSingleParticipateSlice';
