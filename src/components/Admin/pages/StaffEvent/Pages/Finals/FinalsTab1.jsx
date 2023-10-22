@@ -6,7 +6,7 @@ import { filterevents, update1firsts, update1s, update1seconds, update1thirds, u
 
 const FinalsTab1 = () => {
 
-    const token = localStorage.getItem("userInfo")
+    // const token = localStorage.getItem("userInfo")
     // let decodetoken = jwtDecode(token);
     const event = localStorage.getItem("event")
     const dispatch = useDispatch()

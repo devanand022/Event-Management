@@ -6,7 +6,7 @@ import { finalresults } from '../../../../../../actions/eventAction'
 
 const FinalsTab2 = () => {
 
-    const token = localStorage.getItem("userInfo")
+    // const token = localStorage.getItem("userInfo")
     // let decodetoken = jwtDecode(token);
     const event = localStorage.getItem("event")
     const dispatch = useDispatch()

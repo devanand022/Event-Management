@@ -31,13 +31,13 @@ const EditParticipate = () => {
 
     useEffect(() => {
         single && single.map(x => (
-            setName(x.name),
-            setCollege(x.lot_no),
-            setDegree(x.degree),
-            setEmail(x.email),
-            setPhone(x.phone),
-            setSession(x.session),
-            setEvent1(x.event1),
+            setName(x.name) &&
+            setCollege(x.lot_no) &&
+            setDegree(x.degree) &&
+            setEmail(x.email) &&
+            setPhone(x.phone) &&
+            setSession(x.session) &&
+            setEvent1(x.event1) &&
             setEvent2(x.event2)
         ))
     }, [single])
