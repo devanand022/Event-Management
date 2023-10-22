@@ -29,4 +29,6 @@ jobs:
     - run: npm i
     - run: npm run build 
     - run: npm test
+    - run: git config --global user.name 'devanand022'
+    - run: git config --global user.email 'ananddeva578@gmail.com'
     - run: npm run deploy
