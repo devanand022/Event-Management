@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import Signup from "./Signup";
+import '@testing-library/jest-dom'
+import Toogle from "../Toggle/Toggle";
 
 test("testing the app launch", () => {
-    render(<Signup />)
-    expect(screen.getByPlaceholderText("Enter Your Department Name")).toBe();
-
+    render(<Toogle />)
+    const text = screen.queryByTestId("Signupbutton");
+    expect(text).toBeInTheDocument();
 });

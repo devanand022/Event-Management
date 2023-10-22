@@ -17,7 +17,7 @@ const Toggle = () => {
                 <Col md={6} className="right">
                     <Card className="p-3 col-md-8 card">
                         <div className="actionbtns mb-5 mt-3">
-                            <button className="actionbtn signupbtn" onClick={() => setShow(false)}>Signup</button>
+                            <button className="actionbtn signupbtn" data-testid="Signupbutton" onClick={() => setShow(false)}>Signup</button>
                             <button className="actionbtn loginbtn" onClick={() => setShow(true)}>Login</button>
                             <button
                                 style={{ transform: show ? 'translateX(98%)' : 'translateX(0)', transition: 'all 0.2s ease-in-out' }}

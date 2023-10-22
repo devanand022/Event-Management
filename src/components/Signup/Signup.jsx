@@ -46,7 +46,7 @@ const Signup = () => {
                 <Form.Control type="password" placeholder="Enter Your New Password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <div className="mt-4 text-center">
-                <Button type="submit" variant="none" style={{ background: '#5544AE', color: 'white' }}>Signup</Button>
+                <Button type="submit" variant="none" style={{ background: '#5544AE', color: 'white' }} data-testid="Signup" >Signup</Button>
             </div>
         </Form>
     )
