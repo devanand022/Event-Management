@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import collegeReducer from "./slice/collegeSlice";
 import getCollegeReducer from './slice/getCollegeSlice';
 import getEventReducer from './slice/getEventSlice';
-import addReducer from './slice/addSlice';
+import addReducer from './slice/AddSlice';
 import getUnVerifiedCollegeReducer from './slice/getUnVerifiedCollegeSlice';
 import getVerifiedCollegeReducer from './slice/getVerifiedCollegeSlice';
 import singleCollegeReducer from './slice/singleCollegeSlice';
