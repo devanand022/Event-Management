@@ -14,7 +14,7 @@ const FinalsTab2 = () => {
 
     useEffect(() => {
         dispatch(finalresults(event));
-    }, [dispatch])
+    }, [event, dispatch])
 
     return (
         <Card style={{ height: '88vh', width: '100%', alignItems: 'center', display: 'flex', border: 'none' }}>

@@ -61,11 +61,11 @@ const PrelimsTab1 = () => {
                                         <td>{x.lot_no}</td>
                                         <td>{x.email}</td>
                                         {
-                                            x.event1 == event ?
+                                            x.event1 === event ?
                                                 <td>{x.event1}</td> : <td>{x.event2}</td>
                                         }
                                         {
-                                            x.event1 == event ?
+                                            x.event1 === event ?
                                                 <td>
                                                     {
                                                         x.event1result === null ? <Button onClick={() => selectEvent1(x.id)}>Select</Button> :
