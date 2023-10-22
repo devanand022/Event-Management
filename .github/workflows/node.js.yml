@@ -30,6 +30,6 @@ jobs:
     - run: npm run build 
     - run: npm test
     - run: git remote set-url origin https://devanand022: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@github.com/devanand022/project_frontend
-    - run: git config --global user.name 'devanand022'
-    - run: git config --global user.email 'ananddeva578@gmail.com'
+    # - run: git config --global user.name 'devanand022'
+    # - run: git config --global user.email 'ananddeva578@gmail.com'
     - run: npm run deploy
