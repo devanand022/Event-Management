@@ -50,6 +50,11 @@
       "last 1 safari version"
     ]
   },
+  "jest":{
+    "moduleNameMapper":{
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
   "devDependencies": {
     "gh-pages": "^6.0.0"
   }

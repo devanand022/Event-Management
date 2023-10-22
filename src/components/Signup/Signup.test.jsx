@@ -3,6 +3,6 @@ import Signup from "./Signup";
 
 test("testing the app launch", () => {
     render(<Signup />)
-    const text = screen.getByText('Signup')
-    expect(text).toBeInTheDocument()
-})
+    expect(screen.getByPlaceholderText("Enter Your Department Name")).toBe();
+
+});
