@@ -29,3 +29,18 @@ jobs:
     - run: npm i
     - run: npm run build 
     - run: npm test
+    - name: upload artifact
+      uses: actions/upload-pages-artifact@v2
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    steps: 
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
