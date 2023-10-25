@@ -47,7 +47,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with: 
-          name: node-app
+          name: nodejs-app
 
       - name: 'Deploy to Github Pages'
         run: npm run delpoy
