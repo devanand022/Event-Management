@@ -52,4 +52,4 @@ jobs:
       - name: 'Deploy to Github Pages'
         run: |
           npm install
-          npm run delpoy
+          npm run deploy
