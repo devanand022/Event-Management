@@ -50,4 +50,6 @@ jobs:
           name: nodejs-app
 
       - name: 'Deploy to Github Pages'
-        run: npm run delpoy
+        run: |
+          npm install
+          npm run delpoy
