@@ -50,6 +50,4 @@ jobs:
           name: nodejs-app
 
       - name: 'Deploy to Github Pages'
-        run: |
-          npm install
-          npm run deploy
+        run: npm run deploy
