@@ -80,4 +80,4 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             docker pull devanand022/event-management:latest 
-            docker-compose up -d
+            docker -compose up -d
