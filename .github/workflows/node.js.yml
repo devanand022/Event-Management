@@ -76,7 +76,7 @@ jobs:
         with: 
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
-          password: $${{ secrets.SERVER_PASSWORD }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             docker pull devanand022/event-management:latest 
             docker-compose up -d
