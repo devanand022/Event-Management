@@ -31,7 +31,7 @@ jobs:
     steps: 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
+        
       - name: Pull image from docker hub
         run: docker pull devanand022/event-management:latest
 
@@ -39,4 +39,4 @@ jobs:
         run: docker rm -f event-management-container
 
       - name: Run docker container
-        run: docker run -d -p 5000:5000 -name event-management-container devanand022/event-management
+        run: docker run -d -p 5000:5000 -n event-management-container devanand022/event-management
