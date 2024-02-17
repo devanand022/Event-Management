@@ -52,7 +52,6 @@
       "axios": "axios/dist/node/axios.cjs"
     }
   },
-  "homepage": "https:github.com/devanand022/Event-Management/public/index.html",
   "devDependencies": {
     "gh-pages": "^6.0.0"
   }
