@@ -31,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer theme='dark' />
+      // routing
       <Routes>
         <Route path="/" element={<Toggle />} />
         <Route path='/participate/add' element={<AddParticipate />} />
